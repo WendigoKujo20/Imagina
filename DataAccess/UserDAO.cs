@@ -31,11 +31,8 @@ namespace DataAccess
                         while (reader.Read())
                         {
                             UserLoginCache.Rut = reader.GetString(reader.GetOrdinal("RUT_USUARIO"));
-                            UserLoginCache.PrimerNombre = reader.GetString(reader.GetOrdinal("PRIMER_NOMBRE"));
-                            UserLoginCache.SegundoNombre = reader.GetString(reader.GetOrdinal("SEGUNDO_NOMBRE"));
-                            UserLoginCache.PrimerApellido = reader.GetString(reader.GetOrdinal("PRIMER_APELLIDO"));
-                            UserLoginCache.SegundoApellido = reader.GetString(reader.GetOrdinal("SEGUNDO_APELLIDO"));
-                            UserLoginCache.Edad = reader.GetInt32(reader.GetOrdinal("EDAD"));
+                            UserLoginCache.Nombre = reader.GetString(reader.GetOrdinal("NOMBRE"));
+                            UserLoginCache.Apellidos = reader.GetString(reader.GetOrdinal("APELLIDOS"));
                             UserLoginCache.Telefono = reader.GetInt32(reader.GetOrdinal("TELEFONO"));
                             UserLoginCache.Correo = reader.GetString(reader.GetOrdinal("CORREO"));
                             UserLoginCache.Password = reader.GetString(reader.GetOrdinal("PASSWORD"));

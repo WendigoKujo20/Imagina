@@ -38,10 +38,11 @@ namespace Imagina
             this.btnLogin = new System.Windows.Forms.Button();
             this.linkPassword = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblError = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
-            this.lblError = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
@@ -164,6 +165,20 @@ namespace Imagina
             this.panel1.TabIndex = 0;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.White;
+            this.lblError.Image = global::Imagina.Properties.Resources.error;
+            this.lblError.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblError.Location = new System.Drawing.Point(88, 441);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(13, 13);
+            this.lblError.TabIndex = 5;
+            this.lblError.Text = "   ";
+            this.lblError.Visible = false;
+            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Imagina.Properties.Resources.Logo;
@@ -199,19 +214,15 @@ namespace Imagina
             this.btnCerrar.TabStop = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // lblError
+            // button1
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError.ForeColor = System.Drawing.Color.White;
-            this.lblError.Image = global::Imagina.Properties.Resources.error;
-            this.lblError.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblError.Location = new System.Drawing.Point(88, 441);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(13, 13);
-            this.lblError.TabIndex = 5;
-            this.lblError.Text = "   ";
-            this.lblError.Visible = false;
+            this.button1.Location = new System.Drawing.Point(184, 457);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Login
             // 
@@ -219,6 +230,7 @@ namespace Imagina
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(417, 610);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.linkPassword);
             this.Controls.Add(this.btnLogin);
@@ -256,6 +268,7 @@ namespace Imagina
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Button button1;
     }
 }
 

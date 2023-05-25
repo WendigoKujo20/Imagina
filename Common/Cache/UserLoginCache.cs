@@ -9,11 +9,8 @@ namespace Common.Cache
     public static class UserLoginCache
     {
         public static string Rut { get; set; }
-        public static string PrimerNombre { get; set; }
-        public static string SegundoNombre { get; set; }
-        public static string PrimerApellido { get; set; }
-        public static string SegundoApellido { get; set; }
-        public static int Edad { get; set; }
+        public static string Nombre { get; set; }
+        public static string Apellidos { get; set; }
         public static int Telefono { get; set; }
         public static string Correo { get; set; }
         public static string Password { get; set; }
