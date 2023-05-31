@@ -19,7 +19,6 @@ namespace Common.Cache
         public static int AniosExperiencia { get; set; }
         public static int IdGenero { get; set; }
         public static int IdComuna { get; set; }
-        public static int IdEstado { get; set; }
         public static int IdTipoUsuario { get; set; }
     }
 }

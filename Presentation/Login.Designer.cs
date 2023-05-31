@@ -38,11 +38,11 @@ namespace Imagina
             this.btnLogin = new System.Windows.Forms.Button();
             this.linkPassword = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblError = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblError = new System.Windows.Forms.Label();
+            this.btnRegistro = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
@@ -57,7 +57,7 @@ namespace Imagina
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape2,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(417, 610);
+            this.shapeContainer1.Size = new System.Drawing.Size(417, 643);
             this.shapeContainer1.TabIndex = 1;
             this.shapeContainer1.TabStop = false;
             // 
@@ -130,7 +130,7 @@ namespace Imagina
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(91, 486);
+            this.btnLogin.Location = new System.Drawing.Point(91, 483);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(233, 35);
             this.btnLogin.TabIndex = 3;
@@ -145,7 +145,7 @@ namespace Imagina
             this.linkPassword.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkPassword.Font = new System.Drawing.Font("Calibri", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkPassword.LinkColor = System.Drawing.Color.White;
-            this.linkPassword.Location = new System.Drawing.Point(142, 547);
+            this.linkPassword.Location = new System.Drawing.Point(138, 601);
             this.linkPassword.Name = "linkPassword";
             this.linkPassword.Size = new System.Drawing.Size(139, 13);
             this.linkPassword.TabIndex = 0;
@@ -164,20 +164,6 @@ namespace Imagina
             this.panel1.Size = new System.Drawing.Size(417, 242);
             this.panel1.TabIndex = 0;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError.ForeColor = System.Drawing.Color.White;
-            this.lblError.Image = global::Imagina.Properties.Resources.error;
-            this.lblError.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblError.Location = new System.Drawing.Point(88, 441);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(13, 13);
-            this.lblError.TabIndex = 5;
-            this.lblError.Text = "   ";
-            this.lblError.Visible = false;
             // 
             // pictureBox3
             // 
@@ -214,23 +200,45 @@ namespace Imagina
             this.btnCerrar.TabStop = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // button1
+            // lblError
             // 
-            this.button1.Location = new System.Drawing.Point(184, 457);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.White;
+            this.lblError.Image = global::Imagina.Properties.Resources.error;
+            this.lblError.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblError.Location = new System.Drawing.Point(88, 441);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(13, 13);
+            this.lblError.TabIndex = 5;
+            this.lblError.Text = "   ";
+            this.lblError.Visible = false;
+            // 
+            // btnRegistro
+            // 
+            this.btnRegistro.BackColor = System.Drawing.Color.Gray;
+            this.btnRegistro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegistro.FlatAppearance.BorderSize = 0;
+            this.btnRegistro.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistro.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistro.ForeColor = System.Drawing.Color.White;
+            this.btnRegistro.Location = new System.Drawing.Point(91, 540);
+            this.btnRegistro.Name = "btnRegistro";
+            this.btnRegistro.Size = new System.Drawing.Size(233, 35);
+            this.btnRegistro.TabIndex = 7;
+            this.btnRegistro.Text = "Registrate";
+            this.btnRegistro.UseVisualStyleBackColor = false;
+            this.btnRegistro.Click += new System.EventHandler(this.btnRegistro_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(417, 610);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(417, 643);
+            this.Controls.Add(this.btnRegistro);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.linkPassword);
             this.Controls.Add(this.btnLogin);
@@ -268,7 +276,7 @@ namespace Imagina
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRegistro;
     }
 }
 

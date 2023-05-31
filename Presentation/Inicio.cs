@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Common.Cache;
 
 namespace Imagina
 {
@@ -15,9 +16,12 @@ namespace Imagina
     {
         bool barraLateralExpand = true;
         bool serviceCollapsed = true;
+        bool gestionCollapsed = true;
+        int tipoUsuario = UserLoginCache.IdTipoUsuario;
         public Inicio()
         {
             InitializeComponent();
+            DiferenciarInterfaz(tipoUsuario);
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -67,6 +71,22 @@ namespace Imagina
             this.Close();
         }
 
+        private void MoverVentanas()
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btnServicios_Click(object sender, EventArgs e)
+        {
+            ServicesTimer.Start();
+        }
+
+        private void btnGestionar_Click(object sender, EventArgs e)
+        {
+            GestionTimer.Start();
+        }
+
         private void ServicesTimer_Tick(object sender, EventArgs e)
         {
             if (serviceCollapsed)
@@ -89,15 +109,47 @@ namespace Imagina
             }
         }
 
-        private void MoverVentanas()
+        private void GestionTimer_Tick(object sender, EventArgs e)
         {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            if (gestionCollapsed)
+            {
+                gestionContainer.Height += 10;
+                if (gestionContainer.Height == gestionContainer.MaximumSize.Height)
+                {
+                    gestionCollapsed = false;
+                    GestionTimer.Stop();
+                }
+            }
+            else
+            {
+                gestionContainer.Height -= 10;
+                if (gestionContainer.Height == gestionContainer.MinimumSize.Height)
+                {
+                    gestionCollapsed = true;
+                    GestionTimer.Stop();
+                }
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void DiferenciarInterfaz(int tipoUsuario)
         {
-            ServicesTimer.Start();
+            if (tipoUsuario == 1)
+            {
+                servicesContainer.Visible = false;
+                pnlRelleno.Size = new Size(210, 265);
+            }
+            else if (tipoUsuario == 2)
+            {
+                gestionContainer.Visible = false;
+                pnlRelleno.Size = new Size(210, 265);
+            }
+            else if (tipoUsuario == 3)
+            {
+                servicesContainer.Visible = false;
+                gestionContainer.Visible = false;
+                pnlRelleno.Size = new Size(210, 324);
+            }
+
         }
     }
 }

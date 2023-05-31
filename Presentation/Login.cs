@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Domain;
+using Common.Cache;
 
 namespace Imagina
 {
@@ -17,6 +18,17 @@ namespace Imagina
         public Login()
         {
             InitializeComponent();
+            listar();
+        }
+
+        private void listar()
+        {
+            UserModel userModel = new UserModel();
+            var probando = userModel.ObtenerUsuarios();
+            foreach (UsersCache a in probando)
+            {
+                Console.WriteLine(a.Nombre);
+            }
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -97,10 +109,18 @@ namespace Imagina
                     var validarLogin = user.LoginUser(correo, password);
                     if (validarLogin)
                     {
-                        Inicio inicio = new Inicio();
-                        inicio.Show();
-                        inicio.FormClosed += logOut;
-                        this.Hide();
+                        int tipoUsuario = Common.Cache.UserLoginCache.IdTipoUsuario;
+                        if (tipoUsuario != 4)
+                        {
+                            Inicio inicio = new Inicio();
+                            inicio.Show();
+                            inicio.FormClosed += logOut;
+                            this.Hide();
+                        }
+                        else error("Usuario no autorizado");
+                        txtPassword.Text = "Contraseña";
+                        txtCorreo.Text = "Correo";
+                        txtPassword.UseSystemPasswordChar = false;
                     }
                     else
                     {
@@ -137,10 +157,11 @@ namespace Imagina
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnRegistro_Click(object sender, EventArgs e)
         {
             Registro registro = new Registro();
             registro.Show();
+            registro.FormClosed += logOut;
             this.Hide();
         }
     }
