@@ -18,17 +18,6 @@ namespace Imagina
         public Login()
         {
             InitializeComponent();
-            listar();
-        }
-
-        private void listar()
-        {
-            UserModel userModel = new UserModel();
-            var probando = userModel.ObtenerUsuarios();
-            foreach (UsersCache a in probando)
-            {
-                Console.WriteLine(a.Nombre);
-            }
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -109,7 +98,7 @@ namespace Imagina
                     var validarLogin = user.LoginUser(correo, password);
                     if (validarLogin)
                     {
-                        int tipoUsuario = Common.Cache.UserLoginCache.IdTipoUsuario;
+                        int tipoUsuario = UserLoginCache.IdTipoUsuario;
                         if (tipoUsuario != 4)
                         {
                             Inicio inicio = new Inicio();

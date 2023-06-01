@@ -8,20 +8,19 @@ using Common.Cache;
 
 namespace Domain
 {
-    public class UserModel
+    public class UserModel  
     {
-
         UserDAO userDao = new UserDAO();
+        User user = new User();
 
         public bool LoginUser(string correo, string password)
         {
             return userDao.Login(correo, password);
         }
 
-        public List<UsersCache> ObtenerUsuarios()
+        public List<User> ObtenerUsuarios()
         {
             return userDao.ObtenerUsuarios();
         }
-
     }
 }

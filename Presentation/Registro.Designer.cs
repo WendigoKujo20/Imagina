@@ -562,7 +562,6 @@ namespace Imagina
             this.Controls.Add(this.shapeContainer2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Registro";
-            this.Opacity = 0.95D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Registro_MouseDown);

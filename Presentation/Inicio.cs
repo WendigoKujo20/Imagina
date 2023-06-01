@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Common.Cache;
+using Domain;
 
 namespace Imagina
 {
@@ -28,6 +29,128 @@ namespace Imagina
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
+
+        private void listarUsuarios()
+        {
+            pnlInicio.Controls.Clear();
+            UserModel userModel = new UserModel();
+            var usuarios = userModel.ObtenerUsuarios();
+
+            pnlInicio.FlowDirection = FlowDirection.LeftToRight;
+            pnlInicio.WrapContents = true;
+
+            foreach (var usuario in usuarios)
+            {
+                string TipoUsuario = "Desconocido";
+                if (usuario.IdTipoUsuario == 1)
+                {
+                    TipoUsuario = "Administrador";
+                }
+                else if (usuario.IdTipoUsuario == 2)
+                {
+                    TipoUsuario = "  Tecnico";
+                }
+                else if (usuario.IdTipoUsuario == 3)
+                {
+                    TipoUsuario = "  Vendedor";
+                }
+                else if (usuario.IdTipoUsuario == 4)
+                {
+                    TipoUsuario = "  Cliente";
+                }
+
+                Panel panel = new Panel();
+                panel.Name = "pnl" + usuario.Rut;
+                panel.BackColor = System.Drawing.Color.White;
+                panel.Location = new System.Drawing.Point(3, 3);
+                panel.Size = new System.Drawing.Size(295, 248);
+                panel.TabIndex = 0;
+                panel.ResumeLayout(false);
+                panel.PerformLayout();
+                panel.Padding = new Padding(10);
+                panel.Margin = new Padding(5); // Establecer el espacio de separación entre paneles
+
+                Button btnModificar = new Button();
+                btnModificar.BackColor = System.Drawing.Color.Black;
+                btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
+                btnModificar.FlatAppearance.BorderSize = 0;
+                btnModificar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+                btnModificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
+                btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btnModificar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                btnModificar.ForeColor = System.Drawing.Color.White;
+                btnModificar.Location = new System.Drawing.Point(95, 211);
+                btnModificar.Name = "btnModificar";
+                btnModificar.Size = new System.Drawing.Size(89, 31);
+                btnModificar.TabIndex = 4;
+                btnModificar.Text = "Modificar";
+                btnModificar.UseVisualStyleBackColor = false;
+
+                Label lblRut = new Label();
+                lblRut.AutoSize = true;
+                lblRut.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblRut.Location = new System.Drawing.Point(13, 187);
+                lblRut.Name = "lblRut";
+                lblRut.Size = new System.Drawing.Size(40, 17);
+                lblRut.TabIndex = 5;
+                lblRut.Text = "Rut:"+usuario.Rut;
+
+                Label lblCorreo = new Label();
+                lblCorreo.AutoSize = true;
+                lblCorreo.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblCorreo.Location = new System.Drawing.Point(13, 166);
+                lblCorreo.Name = "lblCorreo";
+                lblCorreo.Size = new System.Drawing.Size(64, 17);
+                lblCorreo.TabIndex = 4;
+                lblCorreo.Text = "Correo:"+usuario.Correo;
+
+                Label lblApellidos = new Label();
+                lblApellidos.AutoSize = true;
+                lblApellidos.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblApellidos.Location = new System.Drawing.Point(13, 143);
+                lblApellidos.Name = "lblApellidos";
+                lblApellidos.Size = new System.Drawing.Size(88, 17);
+                lblApellidos.TabIndex = 3;
+                lblApellidos.Text = "Apellidos:"+usuario.Apellidos;
+
+                Label lblNombre = new Label();
+                lblNombre.AutoSize = true;
+                lblNombre.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblNombre.Location = new System.Drawing.Point(13, 121);
+                lblNombre.Name = "lblNombre";
+                lblNombre.Size = new System.Drawing.Size(64, 17);
+                lblNombre.TabIndex = 2;
+                lblNombre.Text = "Nombre:"+usuario.Nombre;
+
+                Label lblTipoUsuario = new Label();
+                lblTipoUsuario.AutoSize = true;
+                lblTipoUsuario.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblTipoUsuario.Location = new System.Drawing.Point(90, 20);
+                lblTipoUsuario.Name = "lblTipoUser";
+                lblTipoUsuario.Size = new System.Drawing.Size(64, 17);
+                lblTipoUsuario.TabIndex = 1;
+                lblTipoUsuario.Text = TipoUsuario;
+
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.BackgroundImage = global::Imagina.Properties.Resources.UsersList;
+                pictureBox.Image = global::Imagina.Properties.Resources.UsersList;
+                pictureBox.Location = new System.Drawing.Point(50, -10);
+                pictureBox.Name = "pictureBox1";
+                pictureBox.Size = new System.Drawing.Size(182, 184);
+                pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+                pictureBox.TabIndex = 0;
+                pictureBox.TabStop = false;
+
+                pnlInicio.Controls.Add(panel);
+                panel.Controls.Add(btnModificar);
+                panel.Controls.Add(lblRut);
+                panel.Controls.Add(lblCorreo);
+                panel.Controls.Add(lblApellidos);
+                panel.Controls.Add(lblNombre);
+                panel.Controls.Add(lblTipoUsuario);
+                panel.Controls.Add(pictureBox);
+            }
+        }
 
         private void TimerBarra_Tick(object sender, EventArgs e)
         {
@@ -150,6 +273,26 @@ namespace Imagina
                 pnlRelleno.Size = new Size(210, 324);
             }
 
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            listarUsuarios();
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            MoverVentanas();
+        }
+
+        private void pnlInicio_MouseDown(object sender, MouseEventArgs e)
+        {
+            MoverVentanas();
+        }
+
+        private void pnlRelleno_MouseDown(object sender, MouseEventArgs e)
+        {
+            MoverVentanas();
         }
     }
 }
