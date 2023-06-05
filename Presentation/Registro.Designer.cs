@@ -48,29 +48,30 @@ namespace Imagina
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtConfirmar = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
-            this.cboDia = new System.Windows.Forms.ComboBox();
-            this.cboMes = new System.Windows.Forms.ComboBox();
-            this.cboAnio = new System.Windows.Forms.ComboBox();
             this.lblFechaNac = new System.Windows.Forms.Label();
-            this.rbMasculino = new System.Windows.Forms.RadioButton();
-            this.rbFemenino = new System.Windows.Forms.RadioButton();
-            this.rbPersonalizado = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
-            this.gboxGenero = new System.Windows.Forms.GroupBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cboRegion = new System.Windows.Forms.ComboBox();
+            this.cboComuna = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.FechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.lblError = new System.Windows.Forms.Label();
+            this.lblGenero = new System.Windows.Forms.Label();
+            this.cboGenero = new System.Windows.Forms.ComboBox();
+            this.lblTipo = new System.Windows.Forms.Label();
+            this.cboTipo = new System.Windows.Forms.ComboBox();
+            this.numericAnios = new System.Windows.Forms.NumericUpDown();
+            this.lblAnios = new System.Windows.Forms.Label();
             btnRegistrar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
-            this.gboxGenero.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAnios)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRegistrar
@@ -83,12 +84,13 @@ namespace Imagina
             btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnRegistrar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btnRegistrar.ForeColor = System.Drawing.Color.White;
-            btnRegistrar.Location = new System.Drawing.Point(65, 758);
+            btnRegistrar.Location = new System.Drawing.Point(65, 780);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new System.Drawing.Size(351, 35);
             btnRegistrar.TabIndex = 1;
             btnRegistrar.Text = "Registrar";
             btnRegistrar.UseVisualStyleBackColor = false;
+            btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // label1
             // 
@@ -139,7 +141,7 @@ namespace Imagina
             this.lineShape7,
             this.lineShape3,
             this.lineShape8});
-            this.shapeContainer2.Size = new System.Drawing.Size(493, 882);
+            this.shapeContainer2.Size = new System.Drawing.Size(493, 888);
             this.shapeContainer2.TabIndex = 7;
             this.shapeContainer2.TabStop = false;
             // 
@@ -253,6 +255,7 @@ namespace Imagina
             this.txtTelefono.TabIndex = 6;
             this.txtTelefono.Text = "Telefono";
             this.txtTelefono.Enter += new System.EventHandler(this.txtTelefono_Enter);
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             this.txtTelefono.Leave += new System.EventHandler(this.txtTelefono_Leave);
             // 
             // txtRut
@@ -311,50 +314,6 @@ namespace Imagina
             this.txtDireccion.Enter += new System.EventHandler(this.txtDireccion_Enter);
             this.txtDireccion.Leave += new System.EventHandler(this.txtDireccion_Leave);
             // 
-            // cboDia
-            // 
-            this.cboDia.BackColor = System.Drawing.Color.White;
-            this.cboDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDia.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboDia.FormattingEnabled = true;
-            this.cboDia.Location = new System.Drawing.Point(66, 565);
-            this.cboDia.Name = "cboDia";
-            this.cboDia.Size = new System.Drawing.Size(95, 23);
-            this.cboDia.TabIndex = 10;
-            // 
-            // cboMes
-            // 
-            this.cboMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMes.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMes.FormattingEnabled = true;
-            this.cboMes.Items.AddRange(new object[] {
-            "Enero",
-            "Febrero",
-            "Marzo",
-            "Abril",
-            "Mayo",
-            "Junio",
-            "Julio",
-            "Agosto",
-            "Septiembre",
-            "Octubre",
-            "Noviembre",
-            "Diciembre"});
-            this.cboMes.Location = new System.Drawing.Point(190, 565);
-            this.cboMes.Name = "cboMes";
-            this.cboMes.Size = new System.Drawing.Size(95, 23);
-            this.cboMes.TabIndex = 11;
-            // 
-            // cboAnio
-            // 
-            this.cboAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboAnio.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboAnio.FormattingEnabled = true;
-            this.cboAnio.Location = new System.Drawing.Point(317, 565);
-            this.cboAnio.Name = "cboAnio";
-            this.cboAnio.Size = new System.Drawing.Size(95, 23);
-            this.cboAnio.TabIndex = 12;
-            // 
             // lblFechaNac
             // 
             this.lblFechaNac.AutoSize = true;
@@ -366,50 +325,6 @@ namespace Imagina
             this.lblFechaNac.Size = new System.Drawing.Size(128, 19);
             this.lblFechaNac.TabIndex = 14;
             this.lblFechaNac.Text = "Fecha Nacimiento";
-            // 
-            // rbMasculino
-            // 
-            this.rbMasculino.AutoSize = true;
-            this.rbMasculino.BackColor = System.Drawing.Color.Black;
-            this.rbMasculino.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbMasculino.Checked = true;
-            this.rbMasculino.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMasculino.ForeColor = System.Drawing.Color.White;
-            this.rbMasculino.Location = new System.Drawing.Point(3, 33);
-            this.rbMasculino.Name = "rbMasculino";
-            this.rbMasculino.Size = new System.Drawing.Size(80, 19);
-            this.rbMasculino.TabIndex = 13;
-            this.rbMasculino.TabStop = true;
-            this.rbMasculino.Text = "Masculino";
-            this.rbMasculino.UseVisualStyleBackColor = false;
-            // 
-            // rbFemenino
-            // 
-            this.rbFemenino.AutoSize = true;
-            this.rbFemenino.BackColor = System.Drawing.Color.Black;
-            this.rbFemenino.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbFemenino.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFemenino.ForeColor = System.Drawing.Color.White;
-            this.rbFemenino.Location = new System.Drawing.Point(124, 33);
-            this.rbFemenino.Name = "rbFemenino";
-            this.rbFemenino.Size = new System.Drawing.Size(77, 19);
-            this.rbFemenino.TabIndex = 14;
-            this.rbFemenino.Text = "Femenino";
-            this.rbFemenino.UseVisualStyleBackColor = false;
-            // 
-            // rbPersonalizado
-            // 
-            this.rbPersonalizado.AutoSize = true;
-            this.rbPersonalizado.BackColor = System.Drawing.Color.Black;
-            this.rbPersonalizado.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbPersonalizado.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPersonalizado.ForeColor = System.Drawing.Color.White;
-            this.rbPersonalizado.Location = new System.Drawing.Point(246, 33);
-            this.rbPersonalizado.Name = "rbPersonalizado";
-            this.rbPersonalizado.Size = new System.Drawing.Size(101, 19);
-            this.rbPersonalizado.TabIndex = 15;
-            this.rbPersonalizado.Text = "Personalizado";
-            this.rbPersonalizado.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
@@ -459,21 +374,6 @@ namespace Imagina
             this.btnCerrar.TabStop = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // gboxGenero
-            // 
-            this.gboxGenero.Controls.Add(this.rbMasculino);
-            this.gboxGenero.Controls.Add(this.rbFemenino);
-            this.gboxGenero.Controls.Add(this.rbPersonalizado);
-            this.gboxGenero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gboxGenero.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gboxGenero.ForeColor = System.Drawing.Color.White;
-            this.gboxGenero.Location = new System.Drawing.Point(65, 661);
-            this.gboxGenero.Name = "gboxGenero";
-            this.gboxGenero.Size = new System.Drawing.Size(350, 67);
-            this.gboxGenero.TabIndex = 20;
-            this.gboxGenero.TabStop = false;
-            this.gboxGenero.Text = "Genero";
-            // 
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.Gray;
@@ -484,7 +384,7 @@ namespace Imagina
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(65, 813);
+            this.btnLogin.Location = new System.Drawing.Point(65, 835);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(351, 35);
             this.btnLogin.TabIndex = 21;
@@ -498,27 +398,34 @@ namespace Imagina
             this.label2.BackColor = System.Drawing.Color.Black;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(64, 604);
+            this.label2.Location = new System.Drawing.Point(64, 568);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 19);
             this.label2.TabIndex = 22;
             this.label2.Text = "Region";
             // 
-            // comboBox1
+            // cboRegion
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(65, 634);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(149, 21);
-            this.comboBox1.TabIndex = 23;
+            this.cboRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRegion.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboRegion.FormattingEnabled = true;
+            this.cboRegion.Location = new System.Drawing.Point(65, 598);
+            this.cboRegion.Name = "cboRegion";
+            this.cboRegion.Size = new System.Drawing.Size(149, 23);
+            this.cboRegion.TabIndex = 23;
             // 
-            // comboBox2
+            // cboComuna
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(264, 634);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(150, 21);
-            this.comboBox2.TabIndex = 24;
+            this.cboComuna.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboComuna.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboComuna.FormattingEnabled = true;
+            this.cboComuna.Items.AddRange(new object[] {
+            "Puente Alto",
+            "Punta Arenas"});
+            this.cboComuna.Location = new System.Drawing.Point(264, 598);
+            this.cboComuna.Name = "cboComuna";
+            this.cboComuna.Size = new System.Drawing.Size(150, 23);
+            this.cboComuna.TabIndex = 24;
             // 
             // label3
             // 
@@ -526,29 +433,134 @@ namespace Imagina
             this.label3.BackColor = System.Drawing.Color.Black;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(262, 604);
+            this.label3.Location = new System.Drawing.Point(262, 568);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 19);
             this.label3.TabIndex = 25;
             this.label3.Text = "Comuna";
+            // 
+            // FechaNacimiento
+            // 
+            this.FechaNacimiento.CalendarFont = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FechaNacimiento.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.FechaNacimiento.Location = new System.Drawing.Point(197, 534);
+            this.FechaNacimiento.Name = "FechaNacimiento";
+            this.FechaNacimiento.Size = new System.Drawing.Size(114, 27);
+            this.FechaNacimiento.TabIndex = 26;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.White;
+            this.lblError.Image = global::Imagina.Properties.Resources.error;
+            this.lblError.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblError.Location = new System.Drawing.Point(66, 752);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(13, 13);
+            this.lblError.TabIndex = 27;
+            this.lblError.Text = "   ";
+            this.lblError.Visible = false;
+            // 
+            // lblGenero
+            // 
+            this.lblGenero.AutoSize = true;
+            this.lblGenero.BackColor = System.Drawing.Color.Black;
+            this.lblGenero.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGenero.ForeColor = System.Drawing.Color.White;
+            this.lblGenero.Location = new System.Drawing.Point(65, 637);
+            this.lblGenero.Name = "lblGenero";
+            this.lblGenero.Size = new System.Drawing.Size(57, 19);
+            this.lblGenero.TabIndex = 28;
+            this.lblGenero.Text = "Genero";
+            // 
+            // cboGenero
+            // 
+            this.cboGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGenero.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboGenero.FormattingEnabled = true;
+            this.cboGenero.Items.AddRange(new object[] {
+            "Masculino",
+            "Femenino",
+            "Personalizado"});
+            this.cboGenero.Location = new System.Drawing.Point(65, 659);
+            this.cboGenero.Name = "cboGenero";
+            this.cboGenero.Size = new System.Drawing.Size(149, 23);
+            this.cboGenero.TabIndex = 29;
+            // 
+            // lblTipo
+            // 
+            this.lblTipo.AutoSize = true;
+            this.lblTipo.BackColor = System.Drawing.Color.Black;
+            this.lblTipo.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipo.ForeColor = System.Drawing.Color.White;
+            this.lblTipo.Location = new System.Drawing.Point(263, 637);
+            this.lblTipo.Name = "lblTipo";
+            this.lblTipo.Size = new System.Drawing.Size(91, 19);
+            this.lblTipo.TabIndex = 30;
+            this.lblTipo.Text = "Tipo Usuario";
+            // 
+            // cboTipo
+            // 
+            this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipo.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTipo.FormattingEnabled = true;
+            this.cboTipo.Items.AddRange(new object[] {
+            "Tecnico",
+            "Vendedor"});
+            this.cboTipo.Location = new System.Drawing.Point(263, 659);
+            this.cboTipo.Name = "cboTipo";
+            this.cboTipo.Size = new System.Drawing.Size(153, 23);
+            this.cboTipo.TabIndex = 31;
+            // 
+            // numericAnios
+            // 
+            this.numericAnios.Location = new System.Drawing.Point(191, 705);
+            this.numericAnios.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numericAnios.Name = "numericAnios";
+            this.numericAnios.Size = new System.Drawing.Size(33, 20);
+            this.numericAnios.TabIndex = 32;
+            this.numericAnios.Visible = false;
+            // 
+            // lblAnios
+            // 
+            this.lblAnios.AutoSize = true;
+            this.lblAnios.BackColor = System.Drawing.Color.Black;
+            this.lblAnios.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnios.ForeColor = System.Drawing.Color.White;
+            this.lblAnios.Location = new System.Drawing.Point(65, 706);
+            this.lblAnios.Name = "lblAnios";
+            this.lblAnios.Size = new System.Drawing.Size(121, 19);
+            this.lblAnios.TabIndex = 33;
+            this.lblAnios.Text = "Años Experiencia";
+            this.lblAnios.Visible = false;
             // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(493, 882);
+            this.ClientSize = new System.Drawing.Size(493, 888);
+            this.Controls.Add(this.lblAnios);
+            this.Controls.Add(this.numericAnios);
+            this.Controls.Add(this.cboTipo);
+            this.Controls.Add(this.lblTipo);
+            this.Controls.Add(this.cboGenero);
+            this.Controls.Add(this.lblGenero);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.FechaNacimiento);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cboComuna);
+            this.Controls.Add(this.cboRegion);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(btnRegistrar);
-            this.Controls.Add(this.gboxGenero);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cboAnio);
-            this.Controls.Add(this.cboMes);
-            this.Controls.Add(this.cboDia);
             this.Controls.Add(this.lblFechaNac);
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.txtConfirmar);
@@ -569,8 +581,7 @@ namespace Imagina
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
-            this.gboxGenero.ResumeLayout(false);
-            this.gboxGenero.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAnios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,13 +604,7 @@ namespace Imagina
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtConfirmar;
         private System.Windows.Forms.TextBox txtDireccion;
-        private System.Windows.Forms.ComboBox cboDia;
-        private System.Windows.Forms.ComboBox cboMes;
-        private System.Windows.Forms.ComboBox cboAnio;
         private System.Windows.Forms.Label lblFechaNac;
-        private System.Windows.Forms.RadioButton rbMasculino;
-        private System.Windows.Forms.RadioButton rbFemenino;
-        private System.Windows.Forms.RadioButton rbPersonalizado;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox btnMinimizar;
@@ -607,11 +612,18 @@ namespace Imagina
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
-        private System.Windows.Forms.GroupBox gboxGenero;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cboRegion;
+        private System.Windows.Forms.ComboBox cboComuna;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker FechaNacimiento;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lblGenero;
+        private System.Windows.Forms.ComboBox cboGenero;
+        private System.Windows.Forms.Label lblTipo;
+        private System.Windows.Forms.ComboBox cboTipo;
+        private System.Windows.Forms.NumericUpDown numericAnios;
+        private System.Windows.Forms.Label lblAnios;
     }
 }

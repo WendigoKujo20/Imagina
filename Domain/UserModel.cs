@@ -11,7 +11,6 @@ namespace Domain
     public class UserModel  
     {
         UserDAO userDao = new UserDAO();
-        User user = new User();
 
         public bool LoginUser(string correo, string password)
         {
@@ -21,6 +20,16 @@ namespace Domain
         public List<User> ObtenerUsuarios()
         {
             return userDao.ObtenerUsuarios();
+        }
+
+        public User obtenerUsuario(string Rut)
+        {
+            return userDao.ObtenerUsuario(Rut);
+        }
+
+        public bool RegistrarUsuarios(string rut, string nombre, string apellidos, int telefono, string correo, string password, DateTime fechaNacimiento, string direccion, int aniosExperiencia, int idGenero, int idComuna, int idTipoUsuario)
+        {
+            return userDao.RegistrarUsuario(rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipoUsuario);
         }
     }
 }

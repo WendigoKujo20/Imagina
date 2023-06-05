@@ -8,43 +8,23 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Domain;
 
 namespace Imagina
 {
     public partial class Registro : Form
     {
+        UserModel userModel = new UserModel();
+
         public Registro()
         {
             InitializeComponent();
-            agregarDiaAnio();
-            fechaDefault();
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
-
-        private void agregarDiaAnio()
-        {
-            int anio = DateTime.Now.Year;
-            int anioMinimo = anio - 70;
-            for (int i = 1; i <= 31; i++)
-            {
-                cboDia.Items.Add(i);
-            }
-            for (int i = anio; i >= anioMinimo; i--)
-            {
-                cboAnio.Items.Add(i);
-            }
-        }
-
-        private void fechaDefault()
-        {
-            cboDia.SelectedItem = 1;
-            cboMes.SelectedItem = "Enero";
-            cboAnio.SelectedItem = DateTime.Now.Year;
-        }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
@@ -157,6 +137,7 @@ namespace Imagina
             if (txtPassword.Text == "Contraseña")
             {
                 txtPassword.Text = "";
+                txtPassword.UseSystemPasswordChar = true;
             }
         }
 
@@ -165,6 +146,7 @@ namespace Imagina
             if (txtPassword.Text == "")
             {
                 txtPassword.Text = "Contraseña";
+                txtPassword.UseSystemPasswordChar = false;
             }
         }
 
@@ -173,6 +155,7 @@ namespace Imagina
             if (txtConfirmar.Text == "Confirmar Contraseña")
             {
                 txtConfirmar.Text = "";
+                txtConfirmar.UseSystemPasswordChar = true;
             }
         }
 
@@ -181,6 +164,7 @@ namespace Imagina
             if (txtConfirmar.Text == "")
             {
                 txtConfirmar.Text = "Confirmar Contraseña";
+                txtConfirmar.UseSystemPasswordChar = false;
             }
         }
 
@@ -208,6 +192,111 @@ namespace Imagina
         private void btnLogin_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            int idGenero = 0;
+            int idTipo = 0;
+
+            if (cboGenero.SelectedItem == "Masculino")
+            {
+                idGenero = 1;
+            }else if(cboGenero.SelectedItem == "Femenino")
+            {
+                idGenero = 2;
+            }else if(cboGenero.SelectedItem == "Personalizado")
+            {
+                idGenero = 3;
+            }
+
+            if (cboTipo.SelectedItem == "Tecnico")
+            {
+                idTipo = 2;
+            }else if(cboTipo.SelectedItem == "Vendedor")
+            {
+                idTipo = 3;
+            }
+
+            string rut = txtRut.Text;
+            string nombre = txtNombre.Text;
+            string apellidos = txtApellidos.Text;
+            string telefonoText = txtTelefono.Text;
+            int telefono;
+            bool exito = int.TryParse(telefonoText, out telefono);
+            string correo = txtCorreo.Text;
+            string password = txtPassword.Text;
+            DateTime fechaNacimiento = FechaNacimiento.Value;
+            string direccion = txtDireccion.Text;
+            int aniosExperiencia = (int)numericAnios.Value;
+            int idComuna = 1;
+
+            if (nombre.Length > 1 && nombre != "Nombre")
+            {
+                if (apellidos.Length > 1 && apellidos != "Apellidos")
+                {
+                    if (exito)
+                    {
+                        if (correo.Length > 1 && correo != "Correo")
+                        {
+                            if (password.Length > 1 && password != "Contraseña")
+                            {
+                                if (txtConfirmar.Text == password)
+                                {
+                                    if (direccion.Length > 1 && direccion != "Dirección")
+                                    {
+                                        if (rut.Length > 1 && rut != "Rut")
+                                        {
+                                            if (cboComuna.SelectedItem != null)
+                                            {
+                                                if (cboGenero.SelectedItem != null)
+                                                {
+                                                    if (cboTipo.SelectedItem != null)
+                                                    {
+                                                        bool registrar = userModel.RegistrarUsuarios(rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipo);
+
+                                                        if (registrar)
+                                                        {
+                                                            this.Close();
+                                                        }
+                                                        else error("No se ha podido Registrar");
+                                                    }
+                                                    else error("Tiene que seleccionar un usuario");
+                                                }
+                                                else error("Tiene que seleccionar un genero");
+                                            }
+                                            else error("Tiene que seleccionar una comuna");
+
+                                        }
+                                        else error("El rut no puede estar vacio");
+                                    }
+                                    else error("La direccion no puede estar vacia");
+                                }
+                                else error("Las contraseñas no coinciden");
+                            }
+                            else error("La contraseña no puede estar vacia");
+                        }
+                        else error("El correo no puede estar vacio");
+                    }
+                    else error("El telefono no puede estar vacio");
+                }
+                else error("Los Apellidos no pueden estar vacios");
+            }
+            else error("El nombre no puede estar vacio");
+        }
+        
+        private void error(string mensaje)
+        {
+            lblError.Text = "      " + mensaje;
+            lblError.Visible = true;
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
     }
 }
