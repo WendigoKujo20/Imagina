@@ -188,5 +188,33 @@ namespace DataAccess
             }
             return exito;
         }
+
+        public bool Rechazar(string idServicio, string estadoLibro)
+        {
+            bool exito = false;
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_RECHAZAR", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("P_ID_SERVICIO", OracleDbType.Varchar2).Value = idServicio;
+                    command.Parameters.Add("P_ESTADO_LIBRO", OracleDbType.Varchar2).Value = estadoLibro;
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        exito = true;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+            return exito;
+        }
     }
 }

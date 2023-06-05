@@ -457,6 +457,11 @@ namespace Imagina
                     btnRechazar.TabIndex = 6;
                     btnRechazar.Text = "Rechazar";
                     btnRechazar.UseVisualStyleBackColor = false;
+                    btnRechazar.Click += (sender, e) =>
+                    {
+                        serviceModel.Rechazar(servicio.IdServicio);
+                        listarSolicitudes();
+                    };
 
                     PictureBox pbConfirmar = new PictureBox();
                     pbConfirmar.Image = Properties.Resources.Aceptar;

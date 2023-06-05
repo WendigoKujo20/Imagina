@@ -35,5 +35,10 @@ namespace Domain
         {
             return serviceDAO.EliminarServicio(idServicio);
         }
+
+        public bool Rechazar(string idServicio, string estadoLibro)
+        {
+            return serviceDAO.Rechazar(idServicio, estadoLibro);
+        }
     }
 }
