@@ -28,7 +28,7 @@ namespace DataAccess
                         {
                             Servicio servicio = new Servicio();
 
-                            servicio.IdServicio = reader.GetString(reader.GetOrdinal("ID_SERVICIO"));
+                            servicio.Id = reader.GetString(reader.GetOrdinal("ID"));
                             int estadoLibroOrdinal = reader.GetOrdinal("ESTADO_LIBRO");
                             if (!reader.IsDBNull(estadoLibroOrdinal))
                             {
@@ -72,7 +72,7 @@ namespace DataAccess
             return servicios;
         }
 
-        public bool RegistrarServicio(string idServicio, string estadoLibro, string rutTecnico, string rutCliente, int? costo, DateTime fechaServicio, int idTipoServicio)
+        public bool RegistrarServicio(string id, string estadoLibro, string rutTecnico, string rutCliente, int? costo, DateTime fechaServicio, int idTipoServicio)
         {
             bool exito = false;
 
@@ -82,7 +82,7 @@ namespace DataAccess
                 using (var command = new OracleCommand("SP_REGISTRO_SERVICIO", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("P_ID_SERVICIO", OracleDbType.Varchar2).Value = idServicio;
+                    command.Parameters.Add("P_ID", OracleDbType.Varchar2).Value = id;
                     command.Parameters.Add("P_ESTADO_LIBRO", OracleDbType.Varchar2).Value = estadoLibro;
                     command.Parameters.Add("P_RUT_TECNICO", OracleDbType.Varchar2).Value = rutTecnico;
                     command.Parameters.Add("P_RUT_CLIENTE", OracleDbType.Varchar2).Value = rutCliente;
@@ -105,7 +105,7 @@ namespace DataAccess
             return exito;
         }
 
-        public bool ModificarServicio(string idServicio, DateTime fechaServicio, int idTipoServicio)
+        public bool ModificarServicio(string id, DateTime fechaServicio, int idTipoServicio)
         {
             bool exito = false;
 
@@ -115,7 +115,7 @@ namespace DataAccess
                 using (var command = new OracleCommand("SP_MODIFICAR_SERVICIO", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("P_ID_SERVICIO", OracleDbType.Varchar2).Value = idServicio;
+                    command.Parameters.Add("P_ID", OracleDbType.Varchar2).Value = id;
                     command.Parameters.Add("P_FECHA_SERVICIO", OracleDbType.Date).Value = fechaServicio;
                     command.Parameters.Add("P_ID_TIPO_SERVICIO", OracleDbType.Int32).Value = idTipoServicio;
 
@@ -134,7 +134,7 @@ namespace DataAccess
             return exito;
         }
 
-        public bool AgregarCosto(string idServicio, int costo)
+        public bool AgregarCosto(string id, int costo)
         {
             bool exito = false;
 
@@ -144,7 +144,7 @@ namespace DataAccess
                 using (var command = new OracleCommand("SP_AGREGAR_COSTO", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("P_ID_SERVICIO", OracleDbType.Varchar2).Value = idServicio;
+                    command.Parameters.Add("P_ID", OracleDbType.Varchar2).Value = id;
                     command.Parameters.Add("P_COSTO", OracleDbType.Int32).Value = costo;
 
                     try
@@ -162,7 +162,7 @@ namespace DataAccess
             return exito;
         }
 
-        public bool EliminarServicio(string idServicio)
+        public bool EliminarServicio(string id)
         {
             bool exito = false;
 
@@ -172,7 +172,7 @@ namespace DataAccess
                 using (var command = new OracleCommand("SP_ELIMINAR_SERVICIO", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("P_ID_SERVICIO", OracleDbType.Varchar2).Value = idServicio;
+                    command.Parameters.Add("P_ID", OracleDbType.Varchar2).Value = id;
 
                     try
                     {
@@ -189,7 +189,7 @@ namespace DataAccess
             return exito;
         }
 
-        public bool Rechazar(string idServicio)
+        public bool Rechazar(string id)
         {
             bool exito = false;
 
@@ -199,7 +199,7 @@ namespace DataAccess
                 using (var command = new OracleCommand("SP_RECHAZAR", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("P_ID_SERVICIO", OracleDbType.Varchar2).Value = idServicio;
+                    command.Parameters.Add("P_ID", OracleDbType.Varchar2).Value = id;
 
                     try
                     {

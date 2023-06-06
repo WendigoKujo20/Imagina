@@ -140,6 +140,7 @@ namespace Imagina
             this.btnPerfil.Text = "               Perfil";
             this.btnPerfil.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPerfil.UseVisualStyleBackColor = true;
+            this.btnPerfil.Click += new System.EventHandler(this.btnPerfil_Click);
             // 
             // servicesContainer
             // 

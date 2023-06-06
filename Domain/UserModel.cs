@@ -31,5 +31,15 @@ namespace Domain
         {
             return userDao.RegistrarUsuario(rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipoUsuario);
         }
+
+        public bool ModificarUsuario(string rut, string nombre, string apellidos, int telefono, string correo, string password, DateTime fechaNacimiento, string direccion, int aniosExperiencia, int idGenero, int idComuna, int idTipoUsuario)
+        {
+            return userDao.ModificarUsuario(rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipoUsuario);
+        }
+
+        public bool EliminarUsuario(string rut)
+        {
+            return userDao.EliminarUsuario(rut); 
+        }
     }
 }

@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Domain;
 
 namespace Imagina
 {
     public partial class GestionProducto : Form
     {
+        ProductModel productModel = new ProductModel();
         public GestionProducto()
         {
             InitializeComponent();
         }
 
+        public int IdProducto { get; set; }
         public string Nombre { get; set; }
         public Image Imagen { get; set; }
         public int Precio { get; set; }
@@ -26,13 +29,6 @@ namespace Imagina
         {
             lblNombre.Text = Nombre;
             CargarImagen();
-            CargarGestiones();
-        }
-
-        private void CargarGestiones()
-        {
-            GestionPrecio();
-            GestionStock();
         }
 
         private void CargarImagen()
@@ -58,40 +54,41 @@ namespace Imagina
             }
         }
 
-        private void GestionPrecio()
+        private void btnModificar_Click(object sender, EventArgs e)
         {
-            lblPrecio.Text = "Precio: " + Precio;
-            lblPrecio.Margin = new Padding(0, 12, 0, 0);
-            txtPrecio.Visible = false;
-            linePrecio.Visible = false;
-            editPrecio.Margin = new Padding(0, 0, 10, 0);
+            string costoText = txtPrecio.Text;
+            int costo;
+            bool exitoCosto = int.TryParse(costoText, out costo);
+
+            string stockText = txtStock.Text;
+            int stock;
+            bool exitoStock = int.TryParse(costoText, out stock);
+
+            if (exitoCosto)
+            {
+                if (exitoStock)
+                {
+                    bool modificar = productModel.ModificarProducto(IdProducto, costo, stock);
+                    if (modificar)
+                    {
+                        Close();
+                    }
+                    else error("No se pudo modificar");
+                }
+                else error("Debe introducir un stock para el servicio");
+            }
+            else error("Debe introducir un costo para el servicio");
         }
 
-        private void editPrecio_Click(object sender, EventArgs e)
+        private void error(string mensaje)
         {
-            lblPrecio.Text = "Precio: ";
-            containerPrecio.Size = new Size(62, 32);
-            txtPrecio.Visible = true;
-            linePrecio.Visible = true;
-            editPrecio.Visible = false;
+            lblError.Text = "      " + mensaje;
+            lblError.Visible = true;
         }
 
-        private void GestionStock()
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            lblStock.Text = "Stock: " + Stock;
-            lblStock.Margin = new Padding(0, 12, 0, 0);
-            txtStock.Visible = false;
-            lineStock.Visible = false;
-            editStock.Margin = new Padding(0, 0, 10, 0);
-        }
-
-        private void editStock_Click(object sender, EventArgs e)
-        {
-            lblStock.Text = "Stock: ";
-            containerStock.Size = new Size(62, 32);
-            txtStock.Visible = true;
-            lineStock.Visible = true;
-            editStock.Visible = false;
+            Close();
         }
     }
 }

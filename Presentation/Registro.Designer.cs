@@ -32,15 +32,6 @@ namespace Imagina
             System.Windows.Forms.Button btnRegistrar;
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.lineShape8 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape6 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape7 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape3 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.txtApellidos = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
@@ -66,6 +57,15 @@ namespace Imagina
             this.cboTipo = new System.Windows.Forms.ComboBox();
             this.numericAnios = new System.Windows.Forms.NumericUpDown();
             this.lblAnios = new System.Windows.Forms.Label();
+            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape8 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape3 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape7 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape6 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             btnRegistrar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
@@ -116,104 +116,6 @@ namespace Imagina
             this.txtNombre.Text = "Nombre";
             this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);
-            // 
-            // lineShape8
-            // 
-            this.lineShape8.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape8.Enabled = false;
-            this.lineShape8.Name = "lineShape8";
-            this.lineShape8.X1 = 67;
-            this.lineShape8.X2 = 212;
-            this.lineShape8.Y1 = 334;
-            this.lineShape8.Y2 = 334;
-            // 
-            // shapeContainer2
-            // 
-            this.shapeContainer2.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer2.Name = "shapeContainer2";
-            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape1,
-            this.lineShape9,
-            this.lineShape2,
-            this.lineShape6,
-            this.lineShape4,
-            this.lineShape7,
-            this.lineShape3,
-            this.lineShape8});
-            this.shapeContainer2.Size = new System.Drawing.Size(493, 888);
-            this.shapeContainer2.TabIndex = 7;
-            this.shapeContainer2.TabStop = false;
-            // 
-            // lineShape1
-            // 
-            this.lineShape1.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape1.Enabled = false;
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 266;
-            this.lineShape1.X2 = 411;
-            this.lineShape1.Y1 = 425;
-            this.lineShape1.Y2 = 425;
-            // 
-            // lineShape9
-            // 
-            this.lineShape9.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape9.Enabled = false;
-            this.lineShape9.Name = "lineShape9";
-            this.lineShape9.X1 = 67;
-            this.lineShape9.X2 = 211;
-            this.lineShape9.Y1 = 423;
-            this.lineShape9.Y2 = 423;
-            // 
-            // lineShape2
-            // 
-            this.lineShape2.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape2.Enabled = false;
-            this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 266;
-            this.lineShape2.X2 = 411;
-            this.lineShape2.Y1 = 334;
-            this.lineShape2.Y2 = 334;
-            // 
-            // lineShape6
-            // 
-            this.lineShape6.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape6.Enabled = false;
-            this.lineShape6.Name = "lineShape6";
-            this.lineShape6.X1 = 66;
-            this.lineShape6.X2 = 412;
-            this.lineShape6.Y1 = 469;
-            this.lineShape6.Y2 = 469;
-            // 
-            // lineShape4
-            // 
-            this.lineShape4.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape4.Enabled = false;
-            this.lineShape4.Name = "lineShape4";
-            this.lineShape4.X1 = 265;
-            this.lineShape4.X2 = 411;
-            this.lineShape4.Y1 = 512;
-            this.lineShape4.Y2 = 512;
-            // 
-            // lineShape7
-            // 
-            this.lineShape7.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape7.Enabled = false;
-            this.lineShape7.Name = "lineShape7";
-            this.lineShape7.X1 = 66;
-            this.lineShape7.X2 = 210;
-            this.lineShape7.Y1 = 512;
-            this.lineShape7.Y2 = 512;
-            // 
-            // lineShape3
-            // 
-            this.lineShape3.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape3.Enabled = false;
-            this.lineShape3.Name = "lineShape3";
-            this.lineShape3.X1 = 67;
-            this.lineShape3.X2 = 411;
-            this.lineShape3.Y1 = 378;
-            this.lineShape3.Y2 = 378;
             // 
             // txtApellidos
             // 
@@ -540,6 +442,104 @@ namespace Imagina
             this.lblAnios.Text = "Años Experiencia";
             this.lblAnios.Visible = false;
             // 
+            // shapeContainer2
+            // 
+            this.shapeContainer2.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer2.Name = "shapeContainer2";
+            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape1,
+            this.lineShape9,
+            this.lineShape2,
+            this.lineShape6,
+            this.lineShape4,
+            this.lineShape7,
+            this.lineShape3,
+            this.lineShape8});
+            this.shapeContainer2.Size = new System.Drawing.Size(493, 888);
+            this.shapeContainer2.TabIndex = 7;
+            this.shapeContainer2.TabStop = false;
+            // 
+            // lineShape8
+            // 
+            this.lineShape8.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape8.Enabled = false;
+            this.lineShape8.Name = "lineShape8";
+            this.lineShape8.X1 = 67;
+            this.lineShape8.X2 = 212;
+            this.lineShape8.Y1 = 334;
+            this.lineShape8.Y2 = 334;
+            // 
+            // lineShape3
+            // 
+            this.lineShape3.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape3.Enabled = false;
+            this.lineShape3.Name = "lineShape3";
+            this.lineShape3.X1 = 67;
+            this.lineShape3.X2 = 411;
+            this.lineShape3.Y1 = 378;
+            this.lineShape3.Y2 = 378;
+            // 
+            // lineShape7
+            // 
+            this.lineShape7.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape7.Enabled = false;
+            this.lineShape7.Name = "lineShape7";
+            this.lineShape7.X1 = 66;
+            this.lineShape7.X2 = 210;
+            this.lineShape7.Y1 = 512;
+            this.lineShape7.Y2 = 512;
+            // 
+            // lineShape4
+            // 
+            this.lineShape4.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape4.Enabled = false;
+            this.lineShape4.Name = "lineShape4";
+            this.lineShape4.X1 = 265;
+            this.lineShape4.X2 = 411;
+            this.lineShape4.Y1 = 512;
+            this.lineShape4.Y2 = 512;
+            // 
+            // lineShape6
+            // 
+            this.lineShape6.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape6.Enabled = false;
+            this.lineShape6.Name = "lineShape6";
+            this.lineShape6.X1 = 66;
+            this.lineShape6.X2 = 412;
+            this.lineShape6.Y1 = 469;
+            this.lineShape6.Y2 = 469;
+            // 
+            // lineShape2
+            // 
+            this.lineShape2.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape2.Enabled = false;
+            this.lineShape2.Name = "lineShape2";
+            this.lineShape2.X1 = 266;
+            this.lineShape2.X2 = 411;
+            this.lineShape2.Y1 = 334;
+            this.lineShape2.Y2 = 334;
+            // 
+            // lineShape9
+            // 
+            this.lineShape9.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape9.Enabled = false;
+            this.lineShape9.Name = "lineShape9";
+            this.lineShape9.X1 = 67;
+            this.lineShape9.X2 = 211;
+            this.lineShape9.Y1 = 423;
+            this.lineShape9.Y2 = 423;
+            // 
+            // lineShape1
+            // 
+            this.lineShape1.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape1.Enabled = false;
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 266;
+            this.lineShape1.X2 = 411;
+            this.lineShape1.Y1 = 425;
+            this.lineShape1.Y2 = 425;
+            // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -591,12 +591,6 @@ namespace Imagina
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNombre;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape8;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape6;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape4;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape7;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape3;
         private System.Windows.Forms.TextBox txtApellidos;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtTelefono;
@@ -609,9 +603,6 @@ namespace Imagina
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox btnMinimizar;
         private System.Windows.Forms.PictureBox btnCerrar;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cboRegion;
@@ -625,5 +616,14 @@ namespace Imagina
         private System.Windows.Forms.ComboBox cboTipo;
         private System.Windows.Forms.NumericUpDown numericAnios;
         private System.Windows.Forms.Label lblAnios;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape6;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape4;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape7;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape3;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape8;
     }
 }

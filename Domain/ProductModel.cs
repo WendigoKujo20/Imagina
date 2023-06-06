@@ -15,5 +15,10 @@ namespace Domain
         {
             return product.ObtenerProductos();
         }
+
+        public bool ModificarProducto(int idProducto, int costo, int stock)
+        {
+            return product.ModificarCostoYStock(idProducto, costo, stock);
+        }
     }
 }

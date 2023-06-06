@@ -83,7 +83,7 @@ namespace Imagina
                     panel.Name = "pnl" + usuario.Rut;
                     panel.BackColor = System.Drawing.Color.White;
                     panel.Location = new System.Drawing.Point(3, 3);
-                    panel.Size = new System.Drawing.Size(295, 248);
+                    panel.Size = new System.Drawing.Size(295, 290);
                     panel.TabIndex = 0;
                     panel.ResumeLayout(false);
                     panel.PerformLayout();
@@ -121,7 +121,35 @@ namespace Imagina
                         modalGestion.IdComuna = usuario.IdComuna;
                         modalGestion.TipoUsuario = TipoUsuario;
 
+                        modalGestion.FormClosed += GestionarUsuario_FormClosed;
+                        this.Hide();
+
                         modalGestion.ShowDialog();
+                    };
+
+                    Button btnEliminar = new Button();
+                    btnEliminar.BackColor = System.Drawing.Color.Red;
+                    btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
+                    btnEliminar.FlatAppearance.BorderSize = 0;
+                    btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+                    btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
+                    btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    btnEliminar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    btnEliminar.ForeColor = System.Drawing.Color.White;
+                    btnEliminar.Location = new System.Drawing.Point(95, 250);
+                    btnEliminar.Name = "btnEliminar";
+                    btnEliminar.Size = new System.Drawing.Size(89, 31);
+                    btnEliminar.TabIndex = 13;
+                    btnEliminar.Text = "Eliminar";
+                    btnEliminar.UseVisualStyleBackColor = false;
+                    btnEliminar.Click += (sender, e) =>
+                    {
+                        bool eliminarUsuario = userModel.EliminarUsuario(usuario.Rut);
+                        if (eliminarUsuario)
+                        {
+                            MessageBox.Show("Usuario Eliminado");
+                            listarUsuarios();
+                        }
                     };
 
                     Label lblRut = new Label();
@@ -187,6 +215,7 @@ namespace Imagina
                     panel.Controls.Add(lblNombre);
                     panel.Controls.Add(lblTipoUsuario);
                     panel.Controls.Add(pictureBox);
+                    panel.Controls.Add(btnEliminar);
                 }    
             }
         }
@@ -276,6 +305,7 @@ namespace Imagina
                 btnModificar.Click += (sender, e) =>
                 {
                     GestionProducto gestionProducto = new GestionProducto();
+                    gestionProducto.IdProducto = producto.IdProducto;
                     gestionProducto.Nombre = producto.Nombre;
                     gestionProducto.Imagen = Imagen;
                     gestionProducto.Precio = producto.Precio;
@@ -371,7 +401,7 @@ namespace Imagina
                     btnModificar.Click += (sender, e) =>
                     {
                         AgregarServicio agregarServicio = new AgregarServicio(true);
-                        agregarServicio.IdServicio = servicio.IdServicio;
+                        agregarServicio.IdServicio = servicio.Id;
                         agregarServicio.FormClosed += AgregarServicio_FormClosed;
                         this.Hide();
                         agregarServicio.ShowDialog();
@@ -394,7 +424,7 @@ namespace Imagina
                     btnEliminar.UseVisualStyleBackColor = false;
                     btnEliminar.Click += (sender, e) =>
                     {
-                        bool eliminarSevicio = serviceModel.EliminarServicio(servicio.IdServicio);
+                        bool eliminarSevicio = serviceModel.EliminarServicio(servicio.Id);
                         if (eliminarSevicio)
                         {
                             MessageBox.Show("Servicio Eliminado");
@@ -459,7 +489,7 @@ namespace Imagina
                     btnRechazar.UseVisualStyleBackColor = false;
                     btnRechazar.Click += (sender, e) =>
                     {
-                        serviceModel.Rechazar(servicio.IdServicio);
+                        serviceModel.Rechazar(servicio.Id);
                         listarSolicitudes();
                     };
 
@@ -502,7 +532,7 @@ namespace Imagina
                     pbConfirmar.Click += (sender, e) =>
                     {
                         int costo = int.Parse(txtMonto.Text);
-                        serviceModel.AgregarCosto(servicio.IdServicio, costo);
+                        serviceModel.AgregarCosto(servicio.Id, costo);
                         pnlSolicitud.Visible = false;
                     };
 
@@ -792,6 +822,12 @@ namespace Imagina
             pnlInicio.Controls.Clear();
         }
 
+        private void GestionarUsuario_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+            listarUsuarios();
+        }
+
         private void btnGestServ_Click(object sender, EventArgs e)
         {
             listarServicios();
@@ -800,6 +836,11 @@ namespace Imagina
         private void btnRevisar_Click(object sender, EventArgs e)
         {
             listarSolicitudes();
+        }
+
+        private void btnPerfil_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -57,5 +57,30 @@ namespace DataAccess
                 return string.Empty;
             }
         }
+
+        public bool ModificarCostoYStock(int idProducto, int costo, int stock)
+        {
+            var data = new
+            {
+                Precio = costo,
+                Stock = stock
+            };
+
+            Console.WriteLine(idProducto);
+
+            var jsonData = JsonConvert.SerializeObject(data);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = cliente.PutAsync("Libros/" + idProducto, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

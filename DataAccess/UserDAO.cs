@@ -167,5 +167,70 @@ namespace DataAccess
             }
             return exito;
         }
+
+        public bool ModificarUsuario(string rut, string nombre, string apellidos, int telefono, string correo, string password, DateTime fechaNacimiento, string direccion, int aniosExperiencia, int idGenero, int idComuna, int idTipoUsuario)
+        {
+            bool exito = false;
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_MODIFICAR_USUARIO", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("P_RUT", OracleDbType.Varchar2).Value = rut;
+                    command.Parameters.Add("P_NOMBRE", OracleDbType.Varchar2).Value = nombre;
+                    command.Parameters.Add("P_APELLIDOS", OracleDbType.Varchar2).Value = apellidos;
+                    command.Parameters.Add("P_TELEFONO", OracleDbType.Int32).Value = telefono;
+                    command.Parameters.Add("P_CORREO", OracleDbType.Varchar2).Value = correo;
+                    command.Parameters.Add("P_PASSWORD", OracleDbType.Varchar2).Value = password;
+                    command.Parameters.Add("P_FECHA_NACIMIENTO", OracleDbType.Date).Value = fechaNacimiento;
+                    command.Parameters.Add("P_DIRECCION", OracleDbType.Varchar2).Value = direccion;
+                    command.Parameters.Add("P_ANIOS_EXPERIENCIA", OracleDbType.Int32).Value = aniosExperiencia;
+                    command.Parameters.Add("P_ID_GENERO", OracleDbType.Int32).Value = idGenero;
+                    command.Parameters.Add("P_ID_COMUNA", OracleDbType.Int32).Value = idComuna;
+                    command.Parameters.Add("P_TIPO_USUARIO", OracleDbType.Int32).Value = idTipoUsuario;
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        exito = true;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+            return exito;
+        }
+
+        public bool EliminarUsuario(string rut)
+        {
+            bool exito = false;
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_ELIMINAR_USUARIO", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("P_RUT", OracleDbType.Varchar2).Value = rut;
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        exito = true;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+            return exito;
+        }
     }
 }

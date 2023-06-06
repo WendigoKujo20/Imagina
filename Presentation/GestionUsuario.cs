@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Domain;
 
 namespace Imagina
 {
@@ -16,6 +17,8 @@ namespace Imagina
         {
             InitializeComponent();
         }
+
+        UserModel userModel = new UserModel();
 
         public string Rut { get; set; }
         public string Nombre { get; set; }
@@ -32,206 +35,215 @@ namespace Imagina
 
         private void GestionUsuario_Load(object sender, EventArgs e)
         {
-            cargarGestiones();
+            lblNombreUsuario.Text = Nombre + " " + Apellidos;
+            lblCorreoUsuarios.Text = Correo;
         }
 
-        private void cargarGestiones()
+        private void txtNombre_Enter(object sender, EventArgs e)
         {
-            GestionRut();
-            GestionNombre();
-            GestionApellidos();
-            GestionTelefono();
-            GestionCorreo();
-            GestionDireccion();
-            GestionFechaNac();
-            GestionGenero();
-            GestionComuna();
-            GestionTipoUsuario();
-            GestionAnios();
+            if (txtNombre.Text == "Nombre")
+            {
+                txtNombre.Text = "";
+            }
         }
 
-        private void GestionRut()
+        private void txtNombre_Leave(object sender, EventArgs e)
         {
-            lblRut.Text = "Rut: " + Rut;
-            lblRut.Margin = new Padding(0, 12, 0, 0);
-            txtRut.Visible = false;
-            lineRut.Visible = false;
-            editRut.Margin = new Padding(0, 0, 10, 0);
+            if (txtNombre.Text == "")
+            {
+                txtNombre.Text = "Nombre";
+            }
         }
 
-        private void editRut_Click(object sender, EventArgs e)
+        private void txtApellidos_Enter(object sender, EventArgs e)
         {
-            lblRut.Text = "Rut: ";
-            containerRut.Size = new Size(38, 29);
-            txtRut.Visible = true;
-            lineRut.Visible = true;
-            editRut.Visible = false;
+            if (txtApellidos.Text == "Apellidos")
+            {
+                txtApellidos.Text = "";
+            }
         }
 
-        private void GestionNombre()
+        private void txtApellidos_Leave(object sender, EventArgs e)
         {
-            lblNombre.Text = "Nombre: " + Nombre;
-            lblNombre.Margin = new Padding(0, 12, 0, 0);
-            txtNombre.Visible = false;
-            lineNombre.Visible = false;
-            editNombre.Margin = new Padding(0, 0, 10, 0);
+            if (txtApellidos.Text == "")
+            {
+                txtApellidos.Text = "Apellidos";
+            }
         }
 
-        private void editNombre_Click(object sender, EventArgs e)
+        private void txtCorreo_Enter(object sender, EventArgs e)
         {
-            lblNombre.Text = "Nombre: ";
-            containerNombre.Size = new Size(67, 29);
-            txtNombre.Visible = true;
-            lineNombre.Visible = true;
-            editNombre.Visible = false;
+            if (txtCorreo.Text == "Correo")
+            {
+                txtCorreo.Text = "";
+            }
         }
 
-        private void GestionApellidos()
+        private void txtCorreo_Leave(object sender, EventArgs e)
         {
-            lblApellidos.Text = "Apellidos: " + Apellidos;
-            lblApellidos.Margin = new Padding(0, 12, 0, 0);
-            txtApellidos.Visible = false;
-            lineApellidos.Visible = false;
-            editApellidos.Margin = new Padding(0, 0, 10, 0);
+            if (txtCorreo.Text == "")
+            {
+                txtCorreo.Text = "Correo";
+            }
         }
 
-        private void editApellidos_Click(object sender, EventArgs e)
+        private void txtTelefono_Enter(object sender, EventArgs e)
         {
-            lblApellidos.Text = "Apellidos: ";
-            containerApellidos.Size = new Size(75, 29);
-            txtApellidos.Visible = true;
-            lineApellidos.Visible = true;
-            editApellidos.Visible = false;
-        }
-        private void GestionTelefono()
-        {
-            lblTelefono.Text = "Telefono: " + Telefono;
-            lblTelefono.Margin = new Padding(0, 12, 0, 0);
-            txtTelefono.Visible = false;
-            lineTelefono.Visible = false;
-            editTelefono.Margin = new Padding(0, 0, 10, 0);
+            if (txtTelefono.Text == "Telefono")
+            {
+                txtTelefono.Text = "";
+            }
         }
 
-        private void editTelefono_Click(object sender, EventArgs e)
+        private void txtTelefono_Leave(object sender, EventArgs e)
         {
-            lblTelefono.Text = "Telefono: ";
-            containerTelefono.Size = new Size(76, 29);
-            txtTelefono.Visible = true;
-            lineTelefono.Visible = true;
-            editTelefono.Visible = false;
-        }
-        private void GestionCorreo()
-        {
-            lblCorreo.Text = "Correo: " + Correo;
-            lblCorreo.Margin = new Padding(0, 12, 0, 0);
-            txtCorreo.Visible = false;
-            lineCorreo.Visible = false;
-            editCorreo.Margin = new Padding(0, 0, 10, 0);
+            if (txtTelefono.Text == "")
+            {
+                txtTelefono.Text = "Telefono";
+            }
         }
 
-        private void editCorreo_Click(object sender, EventArgs e)
+        private void txtDireccion_Enter(object sender, EventArgs e)
         {
-            lblCorreo.Text = "Correo: ";
-            containerCorreo.Size = new Size(76, 29);
-            txtCorreo.Visible = true;
-            lineCorreo.Visible = true;
-            editCorreo.Visible = false;
-        }
-        private void GestionDireccion()
-        {
-            lblDireccion.Text = "Direccion: " + Direccion;
-            lblDireccion.Margin = new Padding(0, 12, 0, 0);
-            txtDireccion.Visible = false;
-            lineDireccion.Visible = false;
-            editDireccion.Margin = new Padding(0, 0, 10, 0);
+            if (txtDireccion.Text == "Direccion")
+            {
+                txtDireccion.Text = "";
+            }
         }
 
-        private void editDireccion_Click(object sender, EventArgs e)
+        private void txtDireccion_Leave(object sender, EventArgs e)
         {
-            lblDireccion.Text = "Direccion: ";
-            containerDireccion.Size = new Size(76, 29);
-            txtDireccion.Visible = true;
-            lineDireccion.Visible = true;
-            editDireccion.Visible = false;
+            if (txtDireccion.Text == "")
+            {
+                txtDireccion.Text = "Direccion";
+            }
         }
 
-        private void GestionFechaNac()
+        private void txtPassword_Enter(object sender, EventArgs e)
         {
-            string FechaSinHora = FechaNacimiento.ToString("dd/MM/yyyy");
-            lblNacimiento.Text = "Fecha Nacimiento: " + FechaSinHora;
-            lblNacimiento.Margin = new Padding(0, 12, 0, 0);
-            editNacimiento.Margin = new Padding(0, 0, 10, 0);
-            dtNacimiento.Visible = false;
+            if (txtPassword.Text == "Contraseña")
+            {
+                txtPassword.Text = "";
+                txtPassword.UseSystemPasswordChar = true;
+            }
         }
 
-        private void editNacimiento_Click(object sender, EventArgs e)
+        private void txtPassword_Leave(object sender, EventArgs e)
         {
-            lblNacimiento.Text = "Fecha Nacimiento: ";
-            containerNacimiento.Size = new Size(140, 29);
-            editNacimiento.Visible = false;
-            dtNacimiento.Visible = true;
-        }
-        private void GestionGenero()
-        {
-            lblGenero.Text = "Genero: " + Genero;
-            lblGenero.Margin = new Padding(0, 12, 0, 0);
-            editGenero.Margin = new Padding(0, 0, 10, 0);
-            cboGenero.Visible = false;
+            if (txtPassword.Text == "")
+            {
+                txtPassword.Text = "Contraseña";
+                txtPassword.UseSystemPasswordChar = false;
+            }
         }
 
-        private void editGenero_Click(object sender, EventArgs e)
+        private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            lblGenero.Text = "Genero: ";
-            containerGenero.Size = new Size(76, 29);
-            editGenero.Visible = false;
-            cboGenero.Visible = true;
+            int idGenero = 0;
+            int idTipo = 0;
+
+            if (cboGenero.SelectedItem == "Masculino")
+            {
+                idGenero = 1;
+            }
+            else if (cboGenero.SelectedItem == "Femenino")
+            {
+                idGenero = 2;
+            }
+            else if (cboGenero.SelectedItem == "Personalizado")
+            {
+                idGenero = 3;
+            }
+
+            if (cboTipo.SelectedItem == "Administrador")
+            {
+                idTipo = 1;
+            }
+            else if (cboTipo.SelectedItem == "Tecnico")
+            {
+                idTipo = 2;
+            }
+            else if (cboTipo.SelectedItem == "Vendedor")
+            {
+                idTipo = 3;
+            }else if(cboTipo.SelectedItem == "Cliente")
+            {
+                idTipo = 4;
+            }
+
+            string nombre = txtNombre.Text;
+            string apellidos = txtApellidos.Text;
+            string telefonoText = txtTelefono.Text;
+            int telefono;
+            bool exito = int.TryParse(telefonoText, out telefono);
+            string correo = txtCorreo.Text;
+            string password = txtPassword.Text;
+            DateTime fechaNacimiento = PickerFecha.Value;
+            string direccion = txtDireccion.Text;
+            int aniosExperiencia = (int)numericAnios.Value;
+            int idComuna = 1;
+            if (nombre.Length > 1 && nombre != "Nombre")
+            {
+                if (apellidos.Length > 1 && apellidos != "Apellidos")
+                {
+                    if (exito)
+                    {
+                        if (correo.Length > 1 && correo != "Correo")
+                        {
+                            if (password.Length > 1 && password != "Contraseña")
+                            {
+                                if (direccion.Length > 1 && direccion != "Dirección")
+                                {
+                                    if (cboComuna.SelectedItem != null)
+                                    {
+                                        if (cboGenero.SelectedItem != null)
+                                        {
+                                            if (cboTipo.SelectedItem != null)
+                                            {
+                                                bool modificar = userModel.ModificarUsuario(Rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipo);
+
+                                                if (modificar)
+                                                {
+                                                    this.Close();
+                                                }
+                                                else error("No se ha podido Registrar");
+                                            }
+                                            else error("Tiene que seleccionar un usuario");
+                                        }
+                                        else error("Tiene que seleccionar un genero");
+                                    }
+                                    else error("Tiene que seleccionar una comuna");
+                                }
+                                else error("La direccion no puede estar vacia");
+                            }
+                            else error("La contraseña no puede estar vacia");
+                        }
+                        else error("El correo no puede estar vacio");
+                    }
+                    else error("El telefono no puede estar vacio");
+                }
+                else error("Los Apellidos no pueden estar vacios");
+            }
+            else error("El nombre no puede estar vacio");
         }
 
-        private void GestionComuna()
+        private void error(string mensaje)
         {
-            lblComuna.Text = "Comuna: " + IdComuna;
-            lblComuna.Margin = new Padding(0, 12, 0, 0);
-            editComuna.Margin = new Padding(0, 0, 10, 0);
-            cboComuna.Visible = false;
+            lblError.Text = "      " + mensaje;
+            lblError.Visible = true;
         }
 
-        private void editComuna_Click(object sender, EventArgs e)
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
-            lblComuna.Text = "Comuna: ";
-            containerComuna.Size = new Size(76, 29);
-            editComuna.Visible = false;
-            cboComuna.Visible = true;
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void GestionTipoUsuario()
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            lblTipoUsuario.Text = "Tipo Usuario: " + TipoUsuario;
-            lblTipoUsuario.Margin = new Padding(0, 12, 0, 0);
-            editTipoUsuario.Margin = new Padding(0, 0, 10, 0);
-            cboTipoUsuario.Visible = false;
-        }
-
-        private void editTipoUsuario_Click(object sender, EventArgs e)
-        {
-            lblTipoUsuario.Text = "Tipo Usuario: ";
-            containerTipoUsuario.Size = new Size(101, 29);
-            editTipoUsuario.Visible = false;
-            cboTipoUsuario.Visible = true;
-        }
-
-        private void GestionAnios() {
-            lblAniosXP.Text = "Años Experiencia: " + AniosExperiencia;
-            lblAniosXP.Margin = new Padding(0, 12, 0, 0);
-            editAnios.Margin = new Padding(0, 0, 10, 0);
-            numericAnios.Visible = false;
-        }
-
-        private void editAnios_Click(object sender, EventArgs e)
-        {
-            lblAniosXP.Text = "Años Experiencia: ";
-            containerAnios.Size = new Size(131, 29);
-            editAnios.Visible = false;
-            numericAnios.Visible = true;
+            Close();
         }
     }
 }
