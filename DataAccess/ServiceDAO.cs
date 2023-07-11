@@ -72,7 +72,7 @@ namespace DataAccess
             return servicios;
         }
 
-        public bool RegistrarServicio(string id, string estadoLibro, string rutTecnico, string rutCliente, int? costo, DateTime fechaServicio, int idTipoServicio)
+        public bool RegistrarServicio(string id, string estadoLibro, string rutCliente, string rutTecnico, int? costo, DateTime fechaServicio, int idTipoServicio)
         {
             bool exito = false;
 
@@ -84,8 +84,8 @@ namespace DataAccess
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("P_ID", OracleDbType.Varchar2).Value = id;
                     command.Parameters.Add("P_ESTADO_LIBRO", OracleDbType.Varchar2).Value = estadoLibro;
-                    command.Parameters.Add("P_RUT_TECNICO", OracleDbType.Varchar2).Value = rutTecnico;
                     command.Parameters.Add("P_RUT_CLIENTE", OracleDbType.Varchar2).Value = rutCliente;
+                    command.Parameters.Add("P_RUT_TECNICO", OracleDbType.Varchar2).Value = rutTecnico;
                     command.Parameters.Add("P_COSTO", OracleDbType.Int32).Value = costo;
                     command.Parameters.Add("P_FECHA_SERVICIO", OracleDbType.Date).Value = fechaServicio;
                     command.Parameters.Add("P_ID_TIPO_SERVICIO", OracleDbType.Int32).Value = idTipoServicio;

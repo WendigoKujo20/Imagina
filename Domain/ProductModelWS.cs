@@ -8,7 +8,7 @@ using Common.Cache;
 
 namespace Domain
 {
-    public class ProductModel
+    public class ProductModelWS
     {
         WebServiceProduct product = new WebServiceProduct();
         public List<Producto> ObtenerProductos()
@@ -16,9 +16,10 @@ namespace Domain
             return product.ObtenerProductos();
         }
 
-        public bool ModificarProducto(int idProducto, int costo, int stock)
+        public bool descontarStock(int id, int cantidad)
         {
-            return product.ModificarCostoYStock(idProducto, costo, stock);
+            string token = "b67cbd88370f80f9daa76671b94668c73e07bd58";
+            return product.descontarStock(id, cantidad, token);
         }
     }
 }

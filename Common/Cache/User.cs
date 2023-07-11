@@ -19,13 +19,14 @@ namespace Common.Cache
         public int AniosExperiencia { get; set; }
         public int IdGenero { get; set; }
         public int IdComuna { get; set; }
+        public string NombreComuna { get; set; }
         public int IdTipoUsuario { get; set; }
 
         public User()
         {
         }
 
-        public User(string rut, string nombre, string apellidos, int telefono, string correo, string password, DateTime fechaNacimiento, string direccion, int aniosExperiencia, int idGenero, int idComuna, int idTipoUsuario)
+        public User(string rut, string nombre, string apellidos, int telefono, string correo, string password, DateTime fechaNacimiento, string direccion, int aniosExperiencia, int idGenero, int idComuna, string nombreComuna, int idTipoUsuario)
         {
             Rut = rut;
             Nombre = nombre;
@@ -38,6 +39,7 @@ namespace Common.Cache
             AniosExperiencia = aniosExperiencia;
             IdGenero = idGenero;
             IdComuna = idComuna;
+            NombreComuna = nombreComuna;
             IdTipoUsuario = idTipoUsuario;
         }
     }

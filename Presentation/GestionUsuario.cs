@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain;
+using Common.Cache;
+using Region = Common.Cache.Region;
 
 namespace Imagina
 {
@@ -16,6 +18,7 @@ namespace Imagina
         public GestionUsuario()
         {
             InitializeComponent();
+            RellenarRegiones();
         }
 
         UserModel userModel = new UserModel();
@@ -33,15 +36,70 @@ namespace Imagina
         public int IdComuna { get; set; }
         public string TipoUsuario { get; set; }
 
+        private void RellenarComunas(int idRegion)
+        {
+            cboComuna.Items.Clear();
+
+            List<Comuna> comunas = userModel.ObtenerComunas();
+            foreach (Comuna comuna in comunas)
+            {
+                if (comuna.IdRegion == idRegion)
+                {
+                    cboComuna.Items.Add(comuna.Nombre);
+                }
+            }
+        }
+
+        private void RellenarRegiones()
+        {
+            List<Region> regiones = userModel.ObtenerRegiones();
+            foreach (Region region in regiones)
+            {
+                cboRegion.Items.Add(region.Nombre);
+            }
+        }
+
+        private void cboRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Region> regiones = userModel.ObtenerRegiones();
+            foreach (Region region in regiones)
+            {
+                if (cboRegion.SelectedItem.ToString() == region.Nombre)
+                {
+                    RellenarComunas(region.IdRegion);
+                }
+            }
+        }
+
+        private int ObtenerIdComuna()
+        {
+            List<Comuna> comunas = userModel.ObtenerComunas();
+
+            foreach (Comuna comuna in comunas)
+            {
+                if (cboComuna.SelectedItem.ToString() == comuna.Nombre)
+                {
+                    return comuna.IdComuna;
+                }
+            }
+            return 0;
+        }
         private void GestionUsuario_Load(object sender, EventArgs e)
         {
             lblNombreUsuario.Text = Nombre + " " + Apellidos;
             lblCorreoUsuarios.Text = Correo;
+            txtNombre.Text = Nombre;
+            txtApellidos.Text = Apellidos;
+            txtCorreo.Text = Correo;
+            txtTelefono.Text = Telefono.ToString();
+            txtDireccion.Text = Direccion;
+            PickerFecha.Value = FechaNacimiento;
+            numericAnios.Value = AniosExperiencia;
         }
 
         private void txtNombre_Enter(object sender, EventArgs e)
         {
-            if (txtNombre.Text == "Nombre")
+            if (txtNombre.Text == Nombre)
             {
                 txtNombre.Text = "";
             }
@@ -51,13 +109,13 @@ namespace Imagina
         {
             if (txtNombre.Text == "")
             {
-                txtNombre.Text = "Nombre";
+                txtNombre.Text = Nombre;
             }
         }
 
         private void txtApellidos_Enter(object sender, EventArgs e)
         {
-            if (txtApellidos.Text == "Apellidos")
+            if (txtApellidos.Text == Apellidos)
             {
                 txtApellidos.Text = "";
             }
@@ -67,13 +125,13 @@ namespace Imagina
         {
             if (txtApellidos.Text == "")
             {
-                txtApellidos.Text = "Apellidos";
+                txtApellidos.Text = Apellidos;
             }
         }
 
         private void txtCorreo_Enter(object sender, EventArgs e)
         {
-            if (txtCorreo.Text == "Correo")
+            if (txtCorreo.Text == Correo)
             {
                 txtCorreo.Text = "";
             }
@@ -83,13 +141,13 @@ namespace Imagina
         {
             if (txtCorreo.Text == "")
             {
-                txtCorreo.Text = "Correo";
+                txtCorreo.Text = Correo;
             }
         }
 
         private void txtTelefono_Enter(object sender, EventArgs e)
         {
-            if (txtTelefono.Text == "Telefono")
+            if (txtTelefono.Text == Telefono.ToString())
             {
                 txtTelefono.Text = "";
             }
@@ -99,13 +157,13 @@ namespace Imagina
         {
             if (txtTelefono.Text == "")
             {
-                txtTelefono.Text = "Telefono";
+                txtTelefono.Text = Telefono.ToString();
             }
         }
 
         private void txtDireccion_Enter(object sender, EventArgs e)
         {
-            if (txtDireccion.Text == "Direccion")
+            if (txtDireccion.Text == Direccion)
             {
                 txtDireccion.Text = "";
             }
@@ -115,7 +173,7 @@ namespace Imagina
         {
             if (txtDireccion.Text == "")
             {
-                txtDireccion.Text = "Direccion";
+                txtDireccion.Text = Direccion;
             }
         }
 
@@ -181,7 +239,6 @@ namespace Imagina
             DateTime fechaNacimiento = PickerFecha.Value;
             string direccion = txtDireccion.Text;
             int aniosExperiencia = (int)numericAnios.Value;
-            int idComuna = 1;
             if (nombre.Length > 1 && nombre != "Nombre")
             {
                 if (apellidos.Length > 1 && apellidos != "Apellidos")
@@ -200,6 +257,7 @@ namespace Imagina
                                         {
                                             if (cboTipo.SelectedItem != null)
                                             {
+                                                int idComuna = ObtenerIdComuna();
                                                 bool modificar = userModel.ModificarUsuario(Rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipo);
 
                                                 if (modificar)

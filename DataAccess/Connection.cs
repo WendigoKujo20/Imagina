@@ -13,7 +13,7 @@ namespace DataAccess
         private readonly string connectionString;
         public Connection()
         {
-            connectionString = "DATA SOURCE = XE; PASSWORD = IMAGINA; USER ID = IMAGINA";
+            connectionString = "DATA SOURCE = XE; PASSWORD = IMAGINALIB; USER ID = C##IMAGINALIB";
         }
 
         protected OracleConnection GetConnection()

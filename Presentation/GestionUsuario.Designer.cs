@@ -277,7 +277,7 @@ namespace Imagina
             "Personalizado"});
             this.cboGenero.Location = new System.Drawing.Point(40, 587);
             this.cboGenero.Name = "cboGenero";
-            this.cboGenero.Size = new System.Drawing.Size(149, 23);
+            this.cboGenero.Size = new System.Drawing.Size(169, 23);
             this.cboGenero.TabIndex = 52;
             // 
             // lblGenero
@@ -322,7 +322,7 @@ namespace Imagina
             this.label3.BackColor = System.Drawing.Color.Black;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(237, 496);
+            this.label3.Location = new System.Drawing.Point(237, 502);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 19);
             this.label3.TabIndex = 48;
@@ -333,9 +333,6 @@ namespace Imagina
             this.cboComuna.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboComuna.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboComuna.FormattingEnabled = true;
-            this.cboComuna.Items.AddRange(new object[] {
-            "Puente Alto",
-            "Punta Arenas"});
             this.cboComuna.Location = new System.Drawing.Point(239, 526);
             this.cboComuna.Name = "cboComuna";
             this.cboComuna.Size = new System.Drawing.Size(150, 23);
@@ -348,8 +345,9 @@ namespace Imagina
             this.cboRegion.FormattingEnabled = true;
             this.cboRegion.Location = new System.Drawing.Point(40, 526);
             this.cboRegion.Name = "cboRegion";
-            this.cboRegion.Size = new System.Drawing.Size(149, 23);
+            this.cboRegion.Size = new System.Drawing.Size(169, 23);
             this.cboRegion.TabIndex = 46;
+            this.cboRegion.SelectedIndexChanged += new System.EventHandler(this.cboRegion_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -357,7 +355,7 @@ namespace Imagina
             this.label2.BackColor = System.Drawing.Color.Black;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(39, 496);
+            this.label2.Location = new System.Drawing.Point(39, 502);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 19);
             this.label2.TabIndex = 45;
@@ -376,7 +374,7 @@ namespace Imagina
             this.btnCancelar.Location = new System.Drawing.Point(40, 763);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(351, 35);
-            this.btnCancelar.TabIndex = 44;
+            this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -402,7 +400,7 @@ namespace Imagina
             this.txtDireccion.Location = new System.Drawing.Point(44, 416);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(347, 20);
-            this.txtDireccion.TabIndex = 40;
+            this.txtDireccion.TabIndex = 7;
             this.txtDireccion.Text = "Direccion";
             this.txtDireccion.Enter += new System.EventHandler(this.txtDireccion_Enter);
             this.txtDireccion.Leave += new System.EventHandler(this.txtDireccion_Leave);
@@ -416,7 +414,7 @@ namespace Imagina
             this.txtPassword.Location = new System.Drawing.Point(43, 373);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(145, 20);
-            this.txtPassword.TabIndex = 41;
+            this.txtPassword.TabIndex = 5;
             this.txtPassword.Text = "Contraseña";
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
@@ -430,7 +428,7 @@ namespace Imagina
             this.txtTelefono.Location = new System.Drawing.Point(242, 370);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(143, 20);
-            this.txtTelefono.TabIndex = 39;
+            this.txtTelefono.TabIndex = 6;
             this.txtTelefono.Text = "Telefono";
             this.txtTelefono.Enter += new System.EventHandler(this.txtTelefono_Enter);
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
@@ -445,7 +443,7 @@ namespace Imagina
             this.txtCorreo.Location = new System.Drawing.Point(44, 326);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(342, 20);
-            this.txtCorreo.TabIndex = 37;
+            this.txtCorreo.TabIndex = 4;
             this.txtCorreo.Text = "Correo";
             this.txtCorreo.Enter += new System.EventHandler(this.txtCorreo_Enter);
             this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave);
@@ -459,7 +457,7 @@ namespace Imagina
             this.txtApellidos.Location = new System.Drawing.Point(244, 282);
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(145, 20);
-            this.txtApellidos.TabIndex = 36;
+            this.txtApellidos.TabIndex = 3;
             this.txtApellidos.Text = "Apellidos";
             this.txtApellidos.Enter += new System.EventHandler(this.txtApellidos_Enter);
             this.txtApellidos.Leave += new System.EventHandler(this.txtApellidos_Leave);
@@ -473,7 +471,7 @@ namespace Imagina
             this.txtNombre.Location = new System.Drawing.Point(44, 281);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(145, 20);
-            this.txtNombre.TabIndex = 35;
+            this.txtNombre.TabIndex = 2;
             this.txtNombre.Text = "Nombre";
             this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);

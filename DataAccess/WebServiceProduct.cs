@@ -30,8 +30,12 @@ namespace DataAccess
 
                 foreach (var producto in productos)
                 {
-                    string nombreGenero = ObtenerNombreGenero(producto.IdGeneroLiterario);
-                    producto.NombreGenero = nombreGenero;
+                    producto.NombreTipo = ObtenerNombreTipo(producto.IdTipoProducto);
+                    if (producto.IdGeneroLiterario.HasValue)
+                    {
+                        string nombreGenero = ObtenerNombreGenero(producto.IdGeneroLiterario.Value);
+                        producto.NombreGenero = nombreGenero;
+                    }
                 }
 
                 return productos;
@@ -58,29 +62,44 @@ namespace DataAccess
             }
         }
 
-        public bool ModificarCostoYStock(int idProducto, int costo, int stock)
+        private string ObtenerNombreTipo(int idTipo)
         {
-            var data = new
-            {
-                Precio = costo,
-                Stock = stock
-            };
-
-            Console.WriteLine(idProducto);
-
-            var jsonData = JsonConvert.SerializeObject(data);
-            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = cliente.PutAsync("Libros/" + idProducto, content).Result;
+            HttpResponseMessage response = cliente.GetAsync("TipoProducto/" + idTipo).Result;
 
             if (response.IsSuccessStatusCode)
             {
-                return true;
+                var cadena = response.Content.ReadAsStringAsync().Result;
+                var tipoProduto = JsonConvert.DeserializeObject<TipoProducto>(cadena);
+                return tipoProduto.Nombre;
             }
             else
             {
-                return false;
+                return string.Empty;
             }
         }
+
+        public bool descontarStock(int productoId, int cantidad, string token)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Token", token);
+                var data = new { cantidad = cantidad };
+                string json = JsonConvert.SerializeObject(data);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PutAsync($"http://127.0.0.1:8000/Libros/{productoId}/descontar-stock/", content).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("El stock se ha modificado correctamente.");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Error al modificar el stock. Código de estado: " + response.StatusCode);
+                    return false;
+                }
+            }
+        }
+
     }
 }

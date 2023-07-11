@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using Oracle.DataAccess.Client;
 using Common.Cache;
-using System.Collections;
 
 namespace DataAccess
 {
@@ -39,9 +38,9 @@ namespace DataAccess
                                 UserLoginCache.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FECHA_NACIMIENTO"));
                                 UserLoginCache.Direccion = reader.GetString(reader.GetOrdinal("DIRECCION"));
                                 UserLoginCache.AniosExperiencia = reader.GetInt32(reader.GetOrdinal("ANIOS_EXPERIENCIA"));
-                                UserLoginCache.IdGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO"));
-                                UserLoginCache.IdComuna = reader.GetInt32(reader.GetOrdinal("ID_COMUNA"));
-                                UserLoginCache.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("ID_TIPO_USUARIO"));
+                                UserLoginCache.IdGenero = reader.GetInt32(reader.GetOrdinal("GENERO"));
+                                UserLoginCache.IdComuna = reader.GetInt32(reader.GetOrdinal("COMUNA"));
+                                UserLoginCache.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("TIPO_USUARIO"));
                             }
                             return true;
                         }
@@ -80,9 +79,9 @@ namespace DataAccess
                             usuario.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FECHA_NACIMIENTO"));
                             usuario.Direccion = reader.GetString(reader.GetOrdinal("DIRECCION"));
                             usuario.AniosExperiencia = reader.GetInt32(reader.GetOrdinal("ANIOS_EXPERIENCIA"));
-                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO"));
-                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("ID_COMUNA"));
-                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("ID_TIPO_USUARIO"));
+                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("GENERO"));
+                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("COMUNA"));
+                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("TIPO_USUARIO"));
 
                             usuarios.Add(usuario);
                         }
@@ -92,7 +91,7 @@ namespace DataAccess
             return usuarios;
         }
 
-        //Probablemente lo usare despues para la navbar
+        //Probablemente lo usare despues para la Searchbar
         public User ObtenerUsuario(string rut)
         {
             using (var connection = GetConnection())
@@ -118,9 +117,9 @@ namespace DataAccess
                             usuario.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FECHA_NACIMIENTO"));
                             usuario.Direccion = reader.GetString(reader.GetOrdinal("DIRECCION"));
                             usuario.AniosExperiencia = reader.GetInt32(reader.GetOrdinal("ANIOS_EXPERIENCIA"));
-                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO"));
-                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("ID_COMUNA"));
-                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("ID_TIPO_USUARIO"));
+                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("GENERO"));
+                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("COMUNA"));
+                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("TIPO_USUARIO"));
 
                             return usuario;
                         }
@@ -130,6 +129,59 @@ namespace DataAccess
             }
         }
 
+        public List<Comuna> ObtenerComunas()
+        {
+            List<Comuna> comunas = new List<Comuna>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using(var command = new OracleCommand("SP_OBTENER_COMUNAS", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("DATOS_COMUNAS", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                    using(OracleDataReader reader = command.ExecuteReader(CommandBehavior.Default))
+                    {
+                        while (reader.Read())
+                        {
+                            Comuna comuna = new Comuna();
+                            comuna.IdComuna = reader.GetInt32(reader.GetOrdinal("ID_COMUNA"));
+                            comuna.Nombre = reader.GetString(reader.GetOrdinal("NOMBRE"));
+                            comuna.IdRegion = reader.GetInt32(reader.GetOrdinal("ID_REGION"));
+
+                            comunas.Add(comuna);
+                        }
+                    }
+                }
+            }
+            return comunas;
+        }
+
+        public List<Region> ObtenerRegiones()
+        {
+            List<Region> regiones = new List<Region>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_OBTENER_REGIONES", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("DATOS_REGIONES", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                    using (OracleDataReader reader = command.ExecuteReader(CommandBehavior.Default))
+                    {
+                        while (reader.Read())
+                        {
+                            Region region = new Region();
+                            region.IdRegion = reader.GetInt32(reader.GetOrdinal("ID_REGION"));
+                            region.Nombre = reader.GetString(reader.GetOrdinal("NOMBRE"));
+
+                            regiones.Add(region);
+                        }
+                    }
+                }
+            }
+            return regiones;
+        }
+
         public bool RegistrarUsuario(string rut, string nombre, string apellidos, int telefono, string correo, string password, DateTime fechaNacimiento, string direccion, int aniosExperiencia, int idGenero, int idComuna, int idTipoUsuario)
         {
             bool exito = false;
@@ -137,7 +189,7 @@ namespace DataAccess
             using(var connection = GetConnection())
             {
                 connection.Open();
-                using (var command = new OracleCommand("SP_REGISTRO", connection))
+                using (var command = new OracleCommand("SP_REGISTRAR_USUARIO", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("P_RUT", OracleDbType.Varchar2).Value = rut;

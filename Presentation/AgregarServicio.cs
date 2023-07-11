@@ -61,7 +61,7 @@ namespace Imagina
             {
                 if (cboTipoServicio.SelectedItem != null)
                 {
-                    bool registrar = serviceModel.RegistrarServicio(idServicio, null, rutTecnico, null, null, fechaServicio, tipoServicio);
+                    bool registrar = serviceModel.RegistrarServicio(idServicio, "", "", rutTecnico, null, fechaServicio, tipoServicio);
 
                     if (registrar)
                     {

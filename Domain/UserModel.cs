@@ -41,5 +41,15 @@ namespace Domain
         {
             return userDao.EliminarUsuario(rut); 
         }
+
+        public List<Comuna> ObtenerComunas()
+        {
+            return userDao.ObtenerComunas();
+        }
+
+        public List<Region> ObtenerRegiones()
+        {
+            return userDao.ObtenerRegiones();
+        }
     }
 }

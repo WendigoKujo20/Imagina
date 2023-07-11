@@ -9,16 +9,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain;
+using Common.Cache;
+using Region = Common.Cache.Region;
 
 namespace Imagina
 {
     public partial class Registro : Form
     {
         UserModel userModel = new UserModel();
+        int tipoUsuario = UserLoginCache.IdTipoUsuario;
 
         public Registro()
         {
             InitializeComponent();
+            RellenarRegiones();
+            if (tipoUsuario != 1)
+            {
+                numericAnios.Visible = false;
+                lblAnios.Visible = false;
+            }
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -26,9 +35,58 @@ namespace Imagina
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
+        private void RellenarComunas(int idRegion)
+        {
+            cboComuna.Items.Clear();
+
+            List<Comuna> comunas = userModel.ObtenerComunas();
+            foreach (Comuna comuna in comunas)
+            {
+                if (comuna.IdRegion == idRegion)
+                {
+                    cboComuna.Items.Add(comuna.Nombre);
+                }
+            }
+        }
+
+        private void RellenarRegiones()
+        {
+            List<Region> regiones = userModel.ObtenerRegiones();
+            foreach (Region region in regiones)
+            {
+                cboRegion.Items.Add(region.Nombre);
+            }
+        }
+
+        private void cboRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Region> regiones = userModel.ObtenerRegiones();
+            foreach (Region region in regiones)
+            {
+                if (cboRegion.SelectedItem.ToString() == region.Nombre)
+                {
+                    RellenarComunas(region.IdRegion);
+                }
+            }
+        }
+
+        private int ObtenerIdComuna()
+        {
+            List<Comuna> comunas = userModel.ObtenerComunas();
+
+            foreach (Comuna comuna in comunas)
+            {
+                if (cboComuna.SelectedItem.ToString() == comuna.Nombre)
+                {
+                    return comuna.IdComuna;
+                }
+            }
+            return 0;
+        }
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void btnMinimizar_Click(object sender, EventArgs e)
@@ -210,6 +268,7 @@ namespace Imagina
                 idGenero = 3;
             }
 
+            //Tipo de Usuario
             if (cboTipo.SelectedItem == "Tecnico")
             {
                 idTipo = 2;
@@ -229,7 +288,6 @@ namespace Imagina
             DateTime fechaNacimiento = FechaNacimiento.Value;
             string direccion = txtDireccion.Text;
             int aniosExperiencia = (int)numericAnios.Value;
-            int idComuna = 1;
 
             if (nombre.Length > 1 && nombre != "Nombre")
             {
@@ -253,6 +311,7 @@ namespace Imagina
                                                 {
                                                     if (cboTipo.SelectedItem != null)
                                                     {
+                                                        int idComuna = ObtenerIdComuna();
                                                         bool registrar = userModel.RegistrarUsuarios(rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipo);
 
                                                         if (registrar)

@@ -233,6 +233,16 @@ namespace Imagina.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap portadaDefault {
+            get {
+                object obj = ResourceManager.GetObject("portadaDefault", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap reparacion {
             get {
                 object obj = ResourceManager.GetObject("reparacion", resourceCulture);

@@ -18,11 +18,13 @@ namespace Imagina
     public partial class Inicio : Form
     {
         UserModel userModel = new UserModel();
-        ProductModel productModel = new ProductModel();
+        ProductModelWS productModelWS = new ProductModelWS();
         ServiceModel serviceModel = new ServiceModel();
+        ProductoModel productModel = new ProductoModel();
         bool barraLateralExpand = true;
         bool serviceCollapsed = true;
-        bool gestionCollapsed = true;
+        bool gestionUserCollapsed = true;
+        bool gestionLibroCollapsed = true;
         int tipoUsuario = UserLoginCache.IdTipoUsuario;
         public Inicio()
         {
@@ -121,9 +123,7 @@ namespace Imagina
                         modalGestion.IdComuna = usuario.IdComuna;
                         modalGestion.TipoUsuario = TipoUsuario;
 
-                        modalGestion.FormClosed += GestionarUsuario_FormClosed;
-                        this.Hide();
-
+                        modalGestion.FormClosed += GestionUsuario_FormClosed;
                         modalGestion.ShowDialog();
                     };
 
@@ -144,11 +144,17 @@ namespace Imagina
                     btnEliminar.UseVisualStyleBackColor = false;
                     btnEliminar.Click += (sender, e) =>
                     {
-                        bool eliminarUsuario = userModel.EliminarUsuario(usuario.Rut);
-                        if (eliminarUsuario)
+
+                        DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
                         {
-                            MessageBox.Show("Usuario Eliminado");
-                            listarUsuarios();
+                            bool eliminarUsuario = userModel.EliminarUsuario(usuario.Rut);
+                            if (eliminarUsuario)
+                            {
+                                MessageBox.Show("Usuario Eliminado");
+                                listarUsuarios();
+                            }
                         }
                     };
 
@@ -220,35 +226,52 @@ namespace Imagina
             }
         }
 
-        private void listarProductos()
+        private void listarProductosWS()
         {
             pnlInicio.Controls.Clear();
 
-            var productos = productModel.ObtenerProductos();
+            var productos = productModelWS.ObtenerProductos();
             pnlInicio.FlowDirection = FlowDirection.LeftToRight;
             pnlInicio.WrapContents = true;
 
             foreach (Producto producto in productos)
             {
                 Panel pnlProductos = new Panel();
+                pnlProductos.BorderStyle = BorderStyle.FixedSingle;
                 pnlProductos.BackColor = System.Drawing.Color.White;
                 pnlProductos.Location = new System.Drawing.Point(3, 3);
                 pnlProductos.Name = "pnlProductos";
-                pnlProductos.Size = new System.Drawing.Size(285, 400);
+                pnlProductos.Size = new System.Drawing.Size(285, 405);
                 pnlProductos.TabIndex = 0;
                 pnlProductos.ResumeLayout(false);
                 pnlProductos.PerformLayout();
                 pnlProductos.Padding = new Padding(10);
                 pnlProductos.Margin = new Padding(13);
 
-                Label lblGenero = new Label();
-                lblGenero.AutoSize = true;
-                lblGenero.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                lblGenero.Location = new System.Drawing.Point(14, 323);
-                lblGenero.Name = "lblGenero";
-                lblGenero.Size = new System.Drawing.Size(122, 19);
-                lblGenero.TabIndex = 4;
-                lblGenero.Text = "Genero: " + producto.NombreGenero;
+                if (producto.IdTipoProducto == 1)
+                {
+                    Label lblGenero = new Label();
+                    lblGenero.AutoSize = true;
+                    lblGenero.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblGenero.Location = new System.Drawing.Point(14, 323);
+                    lblGenero.Name = "lblGenero";
+                    lblGenero.Size = new System.Drawing.Size(122, 19);
+                    lblGenero.TabIndex = 4;
+                    lblGenero.Text = "Genero: " + producto.NombreGenero;
+                    pnlProductos.Controls.Add(lblGenero);
+                }
+                else
+                {
+                    Label lblTipo = new Label();
+                    lblTipo.AutoSize = true;
+                    lblTipo.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblTipo.Location = new System.Drawing.Point(14, 323);
+                    lblTipo.Name = "lblGenero";
+                    lblTipo.Size = new System.Drawing.Size(122, 19);
+                    lblTipo.TabIndex = 4;
+                    lblTipo.Text = "Tipo Producto: " + producto.NombreTipo;
+                    pnlProductos.Controls.Add(lblTipo);
+                }
 
                 Label lblStock = new Label();
                 lblStock.AutoSize = true;
@@ -278,7 +301,7 @@ namespace Imagina
                 lblNombre.Text = "Nombre: " + producto.Nombre;
 
                 PictureBox imgProductos = new PictureBox();
-                var Imagen = ConvertirImagen(producto.Imagen);
+                var Imagen = ConvertirImagenWS(producto.Imagen);
                 imgProductos.Image = Imagen;
                 imgProductos.Location = new System.Drawing.Point(65, 9);
                 imgProductos.Name = "imgProductos";
@@ -287,40 +310,252 @@ namespace Imagina
                 imgProductos.TabIndex = 0;
                 imgProductos.TabStop = false;
 
-                Button btnModificar = new Button();
-                btnModificar.BackColor = System.Drawing.Color.Black;
-                btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
-                btnModificar.FlatAppearance.BorderSize = 0;
-                btnModificar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
-                btnModificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
-                btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                btnModificar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                btnModificar.ForeColor = System.Drawing.Color.White;
-                btnModificar.Location = new System.Drawing.Point(87, 353);
-                btnModificar.Name = "btnModificar";
-                btnModificar.Size = new System.Drawing.Size(105, 35);
-                btnModificar.TabIndex = 4;
-                btnModificar.Text = "Gestionar";
-                btnModificar.UseVisualStyleBackColor = false;
-                btnModificar.Click += (sender, e) =>
+                if (producto.Stock > 0)
                 {
-                    GestionProducto gestionProducto = new GestionProducto();
-                    gestionProducto.IdProducto = producto.IdProducto;
-                    gestionProducto.Nombre = producto.Nombre;
-                    gestionProducto.Imagen = Imagen;
-                    gestionProducto.Precio = producto.Precio;
-                    gestionProducto.Stock = producto.Stock;
+                    Button btnAgregar = new Button();
+                    btnAgregar.BackColor = System.Drawing.Color.Black;
+                    btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
+                    btnAgregar.FlatAppearance.BorderSize = 0;
+                    btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+                    btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
+                    btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    btnAgregar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    btnAgregar.ForeColor = System.Drawing.Color.White;
+                    btnAgregar.Location = new System.Drawing.Point(60, 355);
+                    btnAgregar.Name = "btnAgregar";
+                    btnAgregar.Size = new System.Drawing.Size(160, 35);
+                    btnAgregar.TabIndex = 4;
+                    btnAgregar.Text = "Agregar a Bodega";
+                    btnAgregar.UseVisualStyleBackColor = false;
+                    btnAgregar.Click += (sender, e) =>
+                    {
+                        GestionProductoWS gestionProducto = new GestionProductoWS();
+                        gestionProducto.IdProducto = producto.IdProducto;
+                        gestionProducto.Nombre = producto.Nombre;
+                        gestionProducto.Imagen = Imagen;
+                        gestionProducto.Precio = producto.Precio;
+                        gestionProducto.Stock = producto.Stock;
 
-                    gestionProducto.ShowDialog();
-                };
+                        gestionProducto.FormClosed += GestionProducto_FormClosed;
+                        gestionProducto.ShowDialog();
+                    };
+                    pnlProductos.Controls.Add(btnAgregar);
+                }
+                else
+                {
+                    Label lblNoStock = new Label();
+                    lblNoStock.Text = "Sin Stock Disponible";
+                    lblNoStock.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblNoStock.ForeColor = System.Drawing.Color.Red;
+                    lblNoStock.Size = new System.Drawing.Size(160, 35);
+                    lblNoStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                    lblNoStock.Location = new System.Drawing.Point(60, 355);
+                    pnlProductos.Controls.Add(lblNoStock);
+                }
 
                 pnlInicio.Controls.Add(pnlProductos);
-                pnlProductos.Controls.Add(lblGenero);
                 pnlProductos.Controls.Add(lblStock);
                 pnlProductos.Controls.Add(lblPrecio);
                 pnlProductos.Controls.Add(lblNombre);
                 pnlProductos.Controls.Add(imgProductos);
-                pnlProductos.Controls.Add(btnModificar);
+            }
+        }
+
+        private void listarProductos()
+        {
+            pnlInicio.Controls.Clear();
+
+            var productos = productModel.ListarProductos();
+            pnlInicio.FlowDirection = FlowDirection.LeftToRight;
+            pnlInicio.WrapContents = true;
+
+            foreach (Producto producto in productos)
+            {
+                Panel pnlProductos = new Panel();
+                pnlProductos.BorderStyle = BorderStyle.FixedSingle;
+                pnlProductos.BackColor = System.Drawing.Color.White;
+                pnlProductos.Location = new System.Drawing.Point(3, 3);
+                pnlProductos.Name = "pnlProductos";
+                pnlProductos.TabIndex = 0;
+                pnlProductos.ResumeLayout(false);
+                pnlProductos.PerformLayout();
+                pnlProductos.Padding = new Padding(10);
+                pnlProductos.Margin = new Padding(13);
+                pnlProductos.Size = new System.Drawing.Size(285, 450);
+
+                PictureBox imgProductos = new PictureBox();
+                var Imagen = ConvertirImagenBD(producto.Imagen);
+                imgProductos.Image = Imagen;
+                imgProductos.Location = new System.Drawing.Point(65, 9);
+                imgProductos.Name = "imgProductos";
+                imgProductos.Size = new System.Drawing.Size(150, 207);
+                imgProductos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+                imgProductos.TabIndex = 0;
+                imgProductos.TabStop = false;
+
+                if (producto.Stock > 0 || UserLoginCache.IdTipoUsuario ==1)
+                {
+                    if (UserLoginCache.IdTipoUsuario == 1)
+                    {
+                        Button btnGestionar = new Button();
+                        btnGestionar.BackColor = System.Drawing.Color.Black;
+                        btnGestionar.Cursor = System.Windows.Forms.Cursors.Hand;
+                        btnGestionar.FlatAppearance.BorderSize = 0;
+                        btnGestionar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+                        btnGestionar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
+                        btnGestionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                        btnGestionar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                        btnGestionar.ForeColor = System.Drawing.Color.White;
+                        btnGestionar.Location = new System.Drawing.Point(60, 355);
+                        btnGestionar.Name = "btnGestionar";
+                        btnGestionar.Size = new System.Drawing.Size(160, 35);
+                        btnGestionar.TabIndex = 4;
+                        btnGestionar.Text = "Gestionar Producto";
+                        btnGestionar.UseVisualStyleBackColor = false;
+                        btnGestionar.Click += (sender, e) =>
+                        {
+                            GestionProductoBD gestionProductoBD = new GestionProductoBD();
+                            gestionProductoBD.IdProducto = producto.IdProducto;
+                            gestionProductoBD.Nombre = producto.Nombre;
+                            gestionProductoBD.Autor = producto.Autor;
+                            gestionProductoBD.Descripcion = producto.Descripcion;
+                            gestionProductoBD.Precio = producto.Precio;
+                            gestionProductoBD.Stock = producto.Stock;
+                            gestionProductoBD.Imagen = Imagen;
+                            gestionProductoBD.IdGeneroLiterario = producto.IdGeneroLiterario;
+                            gestionProductoBD.IdTipoProducto = producto.IdTipoProducto;
+                            //gestionProductoBD.NombreImagen = 
+
+                            gestionProductoBD.FormClosed += GestionProductoBD_FormClosed;
+                            gestionProductoBD.ShowDialog();
+                        };
+                        pnlProductos.Controls.Add(btnGestionar);
+
+                        Button btnEliminar = new Button();
+                        btnEliminar.BackColor = System.Drawing.Color.Red;
+                        btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
+                        btnEliminar.FlatAppearance.BorderSize = 0;
+                        btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+                        btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
+                        btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                        btnEliminar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                        btnEliminar.ForeColor = System.Drawing.Color.White;
+                        btnEliminar.Location = new System.Drawing.Point(60, 400);
+                        btnEliminar.Name = "btnEliminar";
+                        btnEliminar.Size = new System.Drawing.Size(160, 35);
+                        btnEliminar.TabIndex = 4;
+                        btnEliminar.Text = "Eliminar Producto";
+                        btnEliminar.UseVisualStyleBackColor = false;
+                        btnEliminar.Click += (sender, e) =>
+                        {
+                            DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas eliminar el {producto.NombreTipo}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                bool eliminarProducto = productModel.EliminarProducto(producto.IdProducto);
+                                if (eliminarProducto)
+                                {
+                                    MessageBox.Show(producto.NombreTipo+" Eliminado");
+                                    listarProductos();
+                                }
+                            }
+                        };
+                        pnlProductos.Controls.Add(btnEliminar);
+                    }
+                    else
+                    {
+                        Button btnVenta = new Button();
+                        btnVenta.BackColor = System.Drawing.Color.Black;
+                        btnVenta.Cursor = System.Windows.Forms.Cursors.Hand;
+                        btnVenta.FlatAppearance.BorderSize = 0;
+                        btnVenta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+                        btnVenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
+                        btnVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                        btnVenta.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                        btnVenta.ForeColor = System.Drawing.Color.White;
+                        btnVenta.Location = new System.Drawing.Point(60, 375);
+                        btnVenta.Name = "btnVenta";
+                        btnVenta.Size = new System.Drawing.Size(160, 35);
+                        btnVenta.TabIndex = 4;
+                        btnVenta.Text = "Agregar a la Venta";
+                        btnVenta.UseVisualStyleBackColor = false;
+                        btnVenta.Click += (sender, e) =>
+                        {
+
+                        };
+                        pnlProductos.Controls.Add(btnVenta);
+                    }
+                }
+                else
+                {
+                    Label lblNoStock = new Label();
+                    lblNoStock.Text = "Sin Stock Disponible";
+                    lblNoStock.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblNoStock.ForeColor = System.Drawing.Color.Red;
+                    lblNoStock.Size = new System.Drawing.Size(160, 35);
+                    lblNoStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                    lblNoStock.Location = new System.Drawing.Point(60, 380);
+                    pnlProductos.Controls.Add(lblNoStock);
+                }
+
+                if (producto.IdTipoProducto == 1)
+                {
+                    Label lblGenero = new Label();
+                    lblGenero.AutoSize = true;
+                    lblGenero.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblGenero.Location = new System.Drawing.Point(14, 323);
+                    lblGenero.Name = "lblGenero";
+                    lblGenero.Size = new System.Drawing.Size(122, 19);
+                    lblGenero.TabIndex = 4;
+                    lblGenero.Text = "Genero: " + producto.NombreGenero;
+                    pnlProductos.Controls.Add(lblGenero);
+                }
+                else
+                {
+                    Label lblTipo = new Label();
+                    lblTipo.AutoSize = true;
+                    lblTipo.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblTipo.Location = new System.Drawing.Point(14, 323);
+                    lblTipo.Name = "lblGenero";
+                    lblTipo.Size = new System.Drawing.Size(122, 19);
+                    lblTipo.TabIndex = 4;
+                    lblTipo.Text = "Tipo Producto: " + producto.NombreTipo;
+                    pnlProductos.Controls.Add(lblTipo);
+                }
+
+                Label lblStock = new Label();
+                lblStock.AutoSize = true;
+                lblStock.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblStock.Location = new System.Drawing.Point(14, 297);
+                lblStock.Name = "lblStock";
+                lblStock.Size = new System.Drawing.Size(49, 19);
+                lblStock.TabIndex = 3;
+                lblStock.Text = "Stock: " + producto.Stock;
+
+                Label lblPrecio = new Label();
+                lblPrecio.AutoSize = true;
+                lblPrecio.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblPrecio.Location = new System.Drawing.Point(14, 269);
+                lblPrecio.Name = "lblPrecio";
+                lblPrecio.Size = new System.Drawing.Size(55, 19);
+                lblPrecio.TabIndex = 2;
+                lblPrecio.Text = "Precio: " + producto.Precio;
+
+                Label lblNombre = new Label();
+                lblNombre.AutoSize = true;
+                lblNombre.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblNombre.Location = new System.Drawing.Point(14, 240);
+                lblNombre.Name = "lblNombre";
+                lblNombre.Size = new System.Drawing.Size(67, 19);
+                lblNombre.TabIndex = 1;
+                lblNombre.Text = "Nombre: " + producto.Nombre;
+
+                pnlInicio.Controls.Add(pnlProductos);
+                
+                pnlProductos.Controls.Add(lblStock);
+                pnlProductos.Controls.Add(lblPrecio);
+                pnlProductos.Controls.Add(lblNombre);
+                pnlProductos.Controls.Add(imgProductos);
             }
         }
 
@@ -632,6 +867,23 @@ namespace Imagina
             }
         }
 
+        private void GestionUsuario_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            pnlInicio.Controls.Clear();
+            listarUsuarios();
+        }
+
+        private void GestionProducto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            pnlInicio.Controls.Clear();
+            listarProductosWS();
+        }
+        private void GestionProductoBD_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            pnlInicio.Controls.Clear();
+            listarProductos();
+        }
+
         private void txtMonto_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
@@ -641,7 +893,7 @@ namespace Imagina
             }
         }
 
-        private Image ConvertirImagen(string imagen)
+        private Image ConvertirImagenWS(string imagen)
         {
             using (var webClient = new WebClient())
             {
@@ -656,8 +908,21 @@ namespace Imagina
                 }
                 catch (Exception)
                 {   
-                    return Properties.Resources.UsersList;
+                    return Properties.Resources.portadaDefault;
                 }
+            }
+        }
+        private Image ConvertirImagenBD(string imagenBase64)
+        {
+            if (string.IsNullOrEmpty(imagenBase64))
+            {
+                return Properties.Resources.portadaDefault;
+            }
+
+            byte[] imagenBytes = Convert.FromBase64String(imagenBase64);
+            using (MemoryStream ms = new MemoryStream(imagenBytes))
+            {
+                return Image.FromStream(ms);
             }
         }
 
@@ -701,6 +966,7 @@ namespace Imagina
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Close();
+            UserLoginCache.IdTipoUsuario = 0;
         }
 
         private void MoverVentanas()
@@ -716,7 +982,7 @@ namespace Imagina
 
         private void btnGestionar_Click(object sender, EventArgs e)
         {
-            GestionTimer.Start();
+            GestionUserTimer.Start();
         }
 
         private void ServicesTimer_Tick(object sender, EventArgs e)
@@ -743,13 +1009,13 @@ namespace Imagina
 
         private void GestionTimer_Tick(object sender, EventArgs e)
         {
-            if (gestionCollapsed)
+            if (gestionUserCollapsed)
             {
                 gestionContainer.Height += 10;
                 if (gestionContainer.Height == gestionContainer.MaximumSize.Height)
                 {
-                    gestionCollapsed = false;
-                    GestionTimer.Stop();
+                    gestionUserCollapsed = false;
+                    GestionUserTimer.Stop();
                 }
             }
             else
@@ -757,8 +1023,29 @@ namespace Imagina
                 gestionContainer.Height -= 10;
                 if (gestionContainer.Height == gestionContainer.MinimumSize.Height)
                 {
-                    gestionCollapsed = true;
-                    GestionTimer.Stop();
+                    gestionUserCollapsed = true;
+                    GestionUserTimer.Stop();
+                }
+            }
+        }
+        private void GestionLibroTimer_Tick(object sender, EventArgs e)
+        {
+            if (gestionLibroCollapsed)
+            {
+                librosContainer.Height += 10;
+                if (librosContainer.Height == librosContainer.MaximumSize.Height)
+                {
+                    gestionLibroCollapsed = false;
+                    GestionLibroTimer.Stop();
+                }
+            }
+            else
+            {
+                librosContainer.Height -= 10;
+                if (librosContainer.Height == librosContainer.MinimumSize.Height)
+                {
+                    gestionLibroCollapsed = true;
+                    GestionLibroTimer.Stop();
                 }
             }
         }
@@ -768,18 +1055,19 @@ namespace Imagina
             if (tipoUsuario == 1)
             {
                 servicesContainer.Visible = false;
-                pnlRelleno.Size = new Size(210, 265);
+                pnlRelleno.Size = new Size(210, 200);
             }
             else if (tipoUsuario == 2)
             {
                 gestionContainer.Visible = false;
+                librosContainer.Visible = false;
                 pnlRelleno.Size = new Size(210, 265);
             }
             else if (tipoUsuario == 3)
             {
                 servicesContainer.Visible = false;
                 gestionContainer.Visible = false;
-                pnlRelleno.Size = new Size(210, 324);
+                pnlRelleno.Size = new Size(210, 260);
             }
 
         }
@@ -802,11 +1090,6 @@ namespace Imagina
         private void pnlRelleno_MouseDown(object sender, MouseEventArgs e)
         {
             MoverVentanas();
-        }
-
-        private void btnLibros_Click(object sender, EventArgs e)
-        {
-            listarProductos();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -841,6 +1124,40 @@ namespace Imagina
         private void btnPerfil_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAgregarUser_Click(object sender, EventArgs e)
+        {
+            Registro registroUsuario = new Registro();
+
+            registroUsuario.ShowDialog();
+        }
+
+        private void btnAlphilia_Click(object sender, EventArgs e)
+        {
+            listarProductosWS();
+        }
+
+        private void btnGestionLibros_Click(object sender, EventArgs e)
+        {
+            GestionLibroTimer.Start();
+        }
+
+        private void btnLibros_Click(object sender, EventArgs e)
+        {
+            listarProductos();
+        }
+
+        private void btnAgregarlibro_Click(object sender, EventArgs e)
+        {
+            RegistroProducto registroProducto = new RegistroProducto();
+            registroProducto.FormClosed += RegistroProducto_FormClosed;
+            registroProducto.ShowDialog();
+        }
+
+        private void RegistroProducto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            listarProductos();
         }
     }
 }

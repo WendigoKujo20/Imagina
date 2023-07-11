@@ -16,9 +16,9 @@ namespace Domain
             return serviceDAO.ObtenerServicios();
         }
 
-        public bool RegistrarServicio(string idServicio, string estadoLibro, string rutTecnico, string rutCliente, int? costo, DateTime fechaServicio, int idTipoServicio)
+        public bool RegistrarServicio(string idServicio, string estadoLibro, string rutCliente, string rutTecnico, int? costo, DateTime fechaServicio, int idTipoServicio)
         {
-            return serviceDAO.RegistrarServicio(idServicio, estadoLibro, rutTecnico, rutCliente, costo, fechaServicio, idTipoServicio);
+            return serviceDAO.RegistrarServicio(idServicio, estadoLibro, rutCliente, rutTecnico, costo, fechaServicio, idTipoServicio);
         }
 
         public bool ModificarServicio(string idServicio, DateTime fechaServicio, int idTipoServicio)

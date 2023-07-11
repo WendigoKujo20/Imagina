@@ -18,10 +18,11 @@ namespace Common.Cache
         public int Stock { get; set; }
         public string Imagen { get; set; }
         [JsonProperty("Id_Genero_Literario")]
-        public int IdGeneroLiterario { get; set; }
+        public int? IdGeneroLiterario { get; set; }
         public string NombreGenero { get; set; }
         [JsonProperty("Id_Tipo_Producto")]
         public int IdTipoProducto { get; set; }
+        public string NombreTipo { get; set; }
 
         public Producto()
         {

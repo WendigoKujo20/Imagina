@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\Comuna.cs" />
     <Compile Include="Cache\GeneroLiterario.cs" />
     <Compile Include="Cache\Producto.cs" />
+    <Compile Include="Cache\Region.cs" />
     <Compile Include="Cache\Servicio.cs" />
+    <Compile Include="Cache\TipoProducto.cs" />
     <Compile Include="Cache\User.cs" />
     <Compile Include="Cache\UserLoginCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

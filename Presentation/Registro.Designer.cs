@@ -44,7 +44,7 @@ namespace Imagina
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnRegresar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.cboRegion = new System.Windows.Forms.ComboBox();
             this.cboComuna = new System.Windows.Forms.ComboBox();
@@ -55,17 +55,17 @@ namespace Imagina
             this.cboGenero = new System.Windows.Forms.ComboBox();
             this.lblTipo = new System.Windows.Forms.Label();
             this.cboTipo = new System.Windows.Forms.ComboBox();
-            this.numericAnios = new System.Windows.Forms.NumericUpDown();
-            this.lblAnios = new System.Windows.Forms.Label();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape8 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape3 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape7 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape6 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape6 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape7 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape3 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape8 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lblAnios = new System.Windows.Forms.Label();
+            this.numericAnios = new System.Windows.Forms.NumericUpDown();
             btnRegistrar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
@@ -84,10 +84,10 @@ namespace Imagina
             btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnRegistrar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btnRegistrar.ForeColor = System.Drawing.Color.White;
-            btnRegistrar.Location = new System.Drawing.Point(65, 780);
+            btnRegistrar.Location = new System.Drawing.Point(65, 754);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new System.Drawing.Size(351, 35);
-            btnRegistrar.TabIndex = 1;
+            btnRegistrar.TabIndex = 15;
             btnRegistrar.Text = "Registrar";
             btnRegistrar.UseVisualStyleBackColor = false;
             btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
@@ -276,23 +276,23 @@ namespace Imagina
             this.btnCerrar.TabStop = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // btnLogin
+            // btnRegresar
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.Gray;
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(65, 835);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(351, 35);
-            this.btnLogin.TabIndex = 21;
-            this.btnLogin.Text = "Iniciar Sesion";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnRegresar.BackColor = System.Drawing.Color.Gray;
+            this.btnRegresar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegresar.FlatAppearance.BorderSize = 0;
+            this.btnRegresar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnRegresar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnRegresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegresar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegresar.ForeColor = System.Drawing.Color.White;
+            this.btnRegresar.Location = new System.Drawing.Point(65, 809);
+            this.btnRegresar.Name = "btnRegresar";
+            this.btnRegresar.Size = new System.Drawing.Size(351, 35);
+            this.btnRegresar.TabIndex = 1;
+            this.btnRegresar.Text = "Regresar";
+            this.btnRegresar.UseVisualStyleBackColor = false;
+            this.btnRegresar.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // label2
             // 
@@ -313,21 +313,19 @@ namespace Imagina
             this.cboRegion.FormattingEnabled = true;
             this.cboRegion.Location = new System.Drawing.Point(65, 598);
             this.cboRegion.Name = "cboRegion";
-            this.cboRegion.Size = new System.Drawing.Size(149, 23);
-            this.cboRegion.TabIndex = 23;
+            this.cboRegion.Size = new System.Drawing.Size(169, 23);
+            this.cboRegion.TabIndex = 11;
+            this.cboRegion.SelectedIndexChanged += new System.EventHandler(this.cboRegion_SelectedIndexChanged);
             // 
             // cboComuna
             // 
             this.cboComuna.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboComuna.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboComuna.FormattingEnabled = true;
-            this.cboComuna.Items.AddRange(new object[] {
-            "Puente Alto",
-            "Punta Arenas"});
             this.cboComuna.Location = new System.Drawing.Point(264, 598);
             this.cboComuna.Name = "cboComuna";
             this.cboComuna.Size = new System.Drawing.Size(150, 23);
-            this.cboComuna.TabIndex = 24;
+            this.cboComuna.TabIndex = 12;
             // 
             // label3
             // 
@@ -349,7 +347,7 @@ namespace Imagina
             this.FechaNacimiento.Location = new System.Drawing.Point(197, 534);
             this.FechaNacimiento.Name = "FechaNacimiento";
             this.FechaNacimiento.Size = new System.Drawing.Size(114, 27);
-            this.FechaNacimiento.TabIndex = 26;
+            this.FechaNacimiento.TabIndex = 10;
             // 
             // lblError
             // 
@@ -358,7 +356,7 @@ namespace Imagina
             this.lblError.ForeColor = System.Drawing.Color.White;
             this.lblError.Image = global::Imagina.Properties.Resources.error;
             this.lblError.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblError.Location = new System.Drawing.Point(66, 752);
+            this.lblError.Location = new System.Drawing.Point(66, 726);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(13, 13);
             this.lblError.TabIndex = 27;
@@ -388,8 +386,8 @@ namespace Imagina
             "Personalizado"});
             this.cboGenero.Location = new System.Drawing.Point(65, 659);
             this.cboGenero.Name = "cboGenero";
-            this.cboGenero.Size = new System.Drawing.Size(149, 23);
-            this.cboGenero.TabIndex = 29;
+            this.cboGenero.Size = new System.Drawing.Size(169, 23);
+            this.cboGenero.TabIndex = 13;
             // 
             // lblTipo
             // 
@@ -414,33 +412,7 @@ namespace Imagina
             this.cboTipo.Location = new System.Drawing.Point(263, 659);
             this.cboTipo.Name = "cboTipo";
             this.cboTipo.Size = new System.Drawing.Size(153, 23);
-            this.cboTipo.TabIndex = 31;
-            // 
-            // numericAnios
-            // 
-            this.numericAnios.Location = new System.Drawing.Point(191, 705);
-            this.numericAnios.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numericAnios.Name = "numericAnios";
-            this.numericAnios.Size = new System.Drawing.Size(33, 20);
-            this.numericAnios.TabIndex = 32;
-            this.numericAnios.Visible = false;
-            // 
-            // lblAnios
-            // 
-            this.lblAnios.AutoSize = true;
-            this.lblAnios.BackColor = System.Drawing.Color.Black;
-            this.lblAnios.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnios.ForeColor = System.Drawing.Color.White;
-            this.lblAnios.Location = new System.Drawing.Point(65, 706);
-            this.lblAnios.Name = "lblAnios";
-            this.lblAnios.Size = new System.Drawing.Size(121, 19);
-            this.lblAnios.TabIndex = 33;
-            this.lblAnios.Text = "Años Experiencia";
-            this.lblAnios.Visible = false;
+            this.cboTipo.TabIndex = 14;
             // 
             // shapeContainer2
             // 
@@ -456,79 +428,9 @@ namespace Imagina
             this.lineShape7,
             this.lineShape3,
             this.lineShape8});
-            this.shapeContainer2.Size = new System.Drawing.Size(493, 888);
+            this.shapeContainer2.Size = new System.Drawing.Size(493, 863);
             this.shapeContainer2.TabIndex = 7;
             this.shapeContainer2.TabStop = false;
-            // 
-            // lineShape8
-            // 
-            this.lineShape8.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape8.Enabled = false;
-            this.lineShape8.Name = "lineShape8";
-            this.lineShape8.X1 = 67;
-            this.lineShape8.X2 = 212;
-            this.lineShape8.Y1 = 334;
-            this.lineShape8.Y2 = 334;
-            // 
-            // lineShape3
-            // 
-            this.lineShape3.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape3.Enabled = false;
-            this.lineShape3.Name = "lineShape3";
-            this.lineShape3.X1 = 67;
-            this.lineShape3.X2 = 411;
-            this.lineShape3.Y1 = 378;
-            this.lineShape3.Y2 = 378;
-            // 
-            // lineShape7
-            // 
-            this.lineShape7.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape7.Enabled = false;
-            this.lineShape7.Name = "lineShape7";
-            this.lineShape7.X1 = 66;
-            this.lineShape7.X2 = 210;
-            this.lineShape7.Y1 = 512;
-            this.lineShape7.Y2 = 512;
-            // 
-            // lineShape4
-            // 
-            this.lineShape4.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape4.Enabled = false;
-            this.lineShape4.Name = "lineShape4";
-            this.lineShape4.X1 = 265;
-            this.lineShape4.X2 = 411;
-            this.lineShape4.Y1 = 512;
-            this.lineShape4.Y2 = 512;
-            // 
-            // lineShape6
-            // 
-            this.lineShape6.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape6.Enabled = false;
-            this.lineShape6.Name = "lineShape6";
-            this.lineShape6.X1 = 66;
-            this.lineShape6.X2 = 412;
-            this.lineShape6.Y1 = 469;
-            this.lineShape6.Y2 = 469;
-            // 
-            // lineShape2
-            // 
-            this.lineShape2.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape2.Enabled = false;
-            this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 266;
-            this.lineShape2.X2 = 411;
-            this.lineShape2.Y1 = 334;
-            this.lineShape2.Y2 = 334;
-            // 
-            // lineShape9
-            // 
-            this.lineShape9.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lineShape9.Enabled = false;
-            this.lineShape9.Name = "lineShape9";
-            this.lineShape9.X1 = 67;
-            this.lineShape9.X2 = 211;
-            this.lineShape9.Y1 = 423;
-            this.lineShape9.Y2 = 423;
             // 
             // lineShape1
             // 
@@ -540,12 +442,106 @@ namespace Imagina
             this.lineShape1.Y1 = 425;
             this.lineShape1.Y2 = 425;
             // 
+            // lineShape9
+            // 
+            this.lineShape9.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape9.Enabled = false;
+            this.lineShape9.Name = "lineShape9";
+            this.lineShape9.X1 = 67;
+            this.lineShape9.X2 = 211;
+            this.lineShape9.Y1 = 423;
+            this.lineShape9.Y2 = 423;
+            // 
+            // lineShape2
+            // 
+            this.lineShape2.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape2.Enabled = false;
+            this.lineShape2.Name = "lineShape2";
+            this.lineShape2.X1 = 266;
+            this.lineShape2.X2 = 411;
+            this.lineShape2.Y1 = 334;
+            this.lineShape2.Y2 = 334;
+            // 
+            // lineShape6
+            // 
+            this.lineShape6.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape6.Enabled = false;
+            this.lineShape6.Name = "lineShape6";
+            this.lineShape6.X1 = 66;
+            this.lineShape6.X2 = 412;
+            this.lineShape6.Y1 = 469;
+            this.lineShape6.Y2 = 469;
+            // 
+            // lineShape4
+            // 
+            this.lineShape4.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape4.Enabled = false;
+            this.lineShape4.Name = "lineShape4";
+            this.lineShape4.X1 = 265;
+            this.lineShape4.X2 = 411;
+            this.lineShape4.Y1 = 512;
+            this.lineShape4.Y2 = 512;
+            // 
+            // lineShape7
+            // 
+            this.lineShape7.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape7.Enabled = false;
+            this.lineShape7.Name = "lineShape7";
+            this.lineShape7.X1 = 66;
+            this.lineShape7.X2 = 210;
+            this.lineShape7.Y1 = 512;
+            this.lineShape7.Y2 = 512;
+            // 
+            // lineShape3
+            // 
+            this.lineShape3.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape3.Enabled = false;
+            this.lineShape3.Name = "lineShape3";
+            this.lineShape3.X1 = 67;
+            this.lineShape3.X2 = 411;
+            this.lineShape3.Y1 = 378;
+            this.lineShape3.Y2 = 378;
+            // 
+            // lineShape8
+            // 
+            this.lineShape8.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lineShape8.Enabled = false;
+            this.lineShape8.Name = "lineShape8";
+            this.lineShape8.X1 = 67;
+            this.lineShape8.X2 = 212;
+            this.lineShape8.Y1 = 334;
+            this.lineShape8.Y2 = 334;
+            // 
+            // lblAnios
+            // 
+            this.lblAnios.AutoSize = true;
+            this.lblAnios.BackColor = System.Drawing.Color.Black;
+            this.lblAnios.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnios.ForeColor = System.Drawing.Color.White;
+            this.lblAnios.Location = new System.Drawing.Point(65, 697);
+            this.lblAnios.Name = "lblAnios";
+            this.lblAnios.Size = new System.Drawing.Size(121, 19);
+            this.lblAnios.TabIndex = 58;
+            this.lblAnios.Text = "Años Experiencia";
+            // 
+            // numericAnios
+            // 
+            this.numericAnios.Location = new System.Drawing.Point(191, 696);
+            this.numericAnios.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numericAnios.Name = "numericAnios";
+            this.numericAnios.Size = new System.Drawing.Size(33, 20);
+            this.numericAnios.TabIndex = 57;
+            // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(493, 888);
+            this.ClientSize = new System.Drawing.Size(493, 863);
             this.Controls.Add(this.lblAnios);
             this.Controls.Add(this.numericAnios);
             this.Controls.Add(this.cboTipo);
@@ -558,7 +554,7 @@ namespace Imagina
             this.Controls.Add(this.cboComuna);
             this.Controls.Add(this.cboRegion);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.btnRegresar);
             this.Controls.Add(btnRegistrar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblFechaNac);
@@ -603,7 +599,7 @@ namespace Imagina
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox btnMinimizar;
         private System.Windows.Forms.PictureBox btnCerrar;
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnRegresar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cboRegion;
         private System.Windows.Forms.ComboBox cboComuna;
@@ -614,8 +610,6 @@ namespace Imagina
         private System.Windows.Forms.ComboBox cboGenero;
         private System.Windows.Forms.Label lblTipo;
         private System.Windows.Forms.ComboBox cboTipo;
-        private System.Windows.Forms.NumericUpDown numericAnios;
-        private System.Windows.Forms.Label lblAnios;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
@@ -625,5 +619,7 @@ namespace Imagina
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape7;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape3;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape8;
+        private System.Windows.Forms.Label lblAnios;
+        private System.Windows.Forms.NumericUpDown numericAnios;
     }
 }
