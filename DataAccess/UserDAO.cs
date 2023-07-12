@@ -38,9 +38,9 @@ namespace DataAccess
                                 UserLoginCache.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FECHA_NACIMIENTO"));
                                 UserLoginCache.Direccion = reader.GetString(reader.GetOrdinal("DIRECCION"));
                                 UserLoginCache.AniosExperiencia = reader.GetInt32(reader.GetOrdinal("ANIOS_EXPERIENCIA"));
-                                UserLoginCache.IdGenero = reader.GetInt32(reader.GetOrdinal("GENERO"));
-                                UserLoginCache.IdComuna = reader.GetInt32(reader.GetOrdinal("COMUNA"));
-                                UserLoginCache.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("TIPO_USUARIO"));
+                                UserLoginCache.IdGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO"));
+                                UserLoginCache.IdComuna = reader.GetInt32(reader.GetOrdinal("ID_COMUNA"));
+                                UserLoginCache.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("ID_TIPO_USUARIO"));
                             }
                             return true;
                         }
@@ -79,9 +79,9 @@ namespace DataAccess
                             usuario.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FECHA_NACIMIENTO"));
                             usuario.Direccion = reader.GetString(reader.GetOrdinal("DIRECCION"));
                             usuario.AniosExperiencia = reader.GetInt32(reader.GetOrdinal("ANIOS_EXPERIENCIA"));
-                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("GENERO"));
-                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("COMUNA"));
-                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("TIPO_USUARIO"));
+                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO"));
+                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("ID_COMUNA"));
+                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("ID_TIPO_USUARIO"));
 
                             usuarios.Add(usuario);
                         }
@@ -117,9 +117,9 @@ namespace DataAccess
                             usuario.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FECHA_NACIMIENTO"));
                             usuario.Direccion = reader.GetString(reader.GetOrdinal("DIRECCION"));
                             usuario.AniosExperiencia = reader.GetInt32(reader.GetOrdinal("ANIOS_EXPERIENCIA"));
-                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("GENERO"));
-                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("COMUNA"));
-                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("TIPO_USUARIO"));
+                            usuario.IdGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO"));
+                            usuario.IdComuna = reader.GetInt32(reader.GetOrdinal("ID_COMUNA"));
+                            usuario.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("ID_TIPO_USUARIO"));
 
                             return usuario;
                         }
@@ -283,6 +283,58 @@ namespace DataAccess
                 }
             }
             return exito;
+        }
+
+        public List<Genero> ObtenerGeneros()
+        {
+            List<Genero> generos = new List<Genero>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_OBTENER_GENEROS", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("DATOS_GENEROS", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                    using (OracleDataReader reader = command.ExecuteReader(CommandBehavior.Default))
+                    {
+                        while (reader.Read())
+                        {
+                            Genero genero = new Genero();
+                            genero.IdGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO"));
+                            genero.Nombre = reader.GetString(reader.GetOrdinal("NOMBRE"));
+
+                            generos.Add(genero);
+                        }
+                    }
+                }
+            }
+            return generos;
+        }
+
+        public List<TipoUsuario> ObtenerTipos()
+        {
+            List<TipoUsuario> tipos = new List<TipoUsuario>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_OBTENER_TIPOS_USUARIOS", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("DATOS_TIPOS", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                    using (OracleDataReader reader = command.ExecuteReader(CommandBehavior.Default))
+                    {
+                        while (reader.Read())
+                        {
+                            TipoUsuario tipo = new TipoUsuario();
+                            tipo.IdTipoUsuario = reader.GetInt32(reader.GetOrdinal("ID_TIPO_USUARIO"));
+                            tipo.Nombre = reader.GetString(reader.GetOrdinal("NOMBRE"));
+
+                            tipos.Add(tipo);
+                        }
+                    }
+                }
+            }
+            return tipos;
         }
     }
 }

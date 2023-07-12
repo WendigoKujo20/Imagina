@@ -44,11 +44,11 @@ namespace Imagina
             this.pnlGestionar = new System.Windows.Forms.Panel();
             this.btnGestionar = new System.Windows.Forms.Button();
             this.librosContainer = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
+            this.pnlAgregar = new System.Windows.Forms.Panel();
             this.btnAgregarlibro = new System.Windows.Forms.Button();
             this.panel12 = new System.Windows.Forms.Panel();
             this.btnLibros = new System.Windows.Forms.Button();
-            this.panel14 = new System.Windows.Forms.Panel();
+            this.pnlAlphilia = new System.Windows.Forms.Panel();
             this.btnAlphilia = new System.Windows.Forms.Button();
             this.pnlLibros = new System.Windows.Forms.Panel();
             this.btnGestionLibros = new System.Windows.Forms.Button();
@@ -61,6 +61,10 @@ namespace Imagina
             this.btnAgregar = new System.Windows.Forms.Button();
             this.pnlServicios = new System.Windows.Forms.Panel();
             this.btnServicios = new System.Windows.Forms.Button();
+            this.pnlProductos = new System.Windows.Forms.Panel();
+            this.btnProductos = new System.Windows.Forms.Button();
+            this.pnlCarrito = new System.Windows.Forms.Panel();
+            this.btnCarrito = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnConfig = new System.Windows.Forms.Button();
             this.pnlRelleno = new System.Windows.Forms.Panel();
@@ -80,15 +84,17 @@ namespace Imagina
             this.panel5.SuspendLayout();
             this.pnlGestionar.SuspendLayout();
             this.librosContainer.SuspendLayout();
-            this.panel11.SuspendLayout();
+            this.pnlAgregar.SuspendLayout();
             this.panel12.SuspendLayout();
-            this.panel14.SuspendLayout();
+            this.pnlAlphilia.SuspendLayout();
             this.pnlLibros.SuspendLayout();
             this.servicesContainer.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
             this.pnlServicios.SuspendLayout();
+            this.pnlProductos.SuspendLayout();
+            this.pnlCarrito.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
             this.SuspendLayout();
@@ -101,6 +107,8 @@ namespace Imagina
             this.BarraLateral.Controls.Add(this.gestionContainer);
             this.BarraLateral.Controls.Add(this.librosContainer);
             this.BarraLateral.Controls.Add(this.servicesContainer);
+            this.BarraLateral.Controls.Add(this.pnlProductos);
+            this.BarraLateral.Controls.Add(this.pnlCarrito);
             this.BarraLateral.Controls.Add(this.panel6);
             this.BarraLateral.Controls.Add(this.pnlRelleno);
             this.BarraLateral.Controls.Add(this.panel8);
@@ -253,9 +261,9 @@ namespace Imagina
             // librosContainer
             // 
             this.librosContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(60)))));
-            this.librosContainer.Controls.Add(this.panel11);
+            this.librosContainer.Controls.Add(this.pnlAgregar);
             this.librosContainer.Controls.Add(this.panel12);
-            this.librosContainer.Controls.Add(this.panel14);
+            this.librosContainer.Controls.Add(this.pnlAlphilia);
             this.librosContainer.Controls.Add(this.pnlLibros);
             this.librosContainer.Location = new System.Drawing.Point(3, 249);
             this.librosContainer.MaximumSize = new System.Drawing.Size(209, 178);
@@ -264,13 +272,13 @@ namespace Imagina
             this.librosContainer.Size = new System.Drawing.Size(209, 54);
             this.librosContainer.TabIndex = 9;
             // 
-            // panel11
+            // pnlAgregar
             // 
-            this.panel11.Controls.Add(this.btnAgregarlibro);
-            this.panel11.Location = new System.Drawing.Point(-6, 97);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(217, 40);
-            this.panel11.TabIndex = 4;
+            this.pnlAgregar.Controls.Add(this.btnAgregarlibro);
+            this.pnlAgregar.Location = new System.Drawing.Point(-6, 97);
+            this.pnlAgregar.Name = "pnlAgregar";
+            this.pnlAgregar.Size = new System.Drawing.Size(217, 40);
+            this.pnlAgregar.TabIndex = 4;
             // 
             // btnAgregarlibro
             // 
@@ -316,13 +324,13 @@ namespace Imagina
             this.btnLibros.UseVisualStyleBackColor = false;
             this.btnLibros.Click += new System.EventHandler(this.btnLibros_Click);
             // 
-            // panel14
+            // pnlAlphilia
             // 
-            this.panel14.Controls.Add(this.btnAlphilia);
-            this.panel14.Location = new System.Drawing.Point(-6, 138);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(217, 40);
-            this.panel14.TabIndex = 5;
+            this.pnlAlphilia.Controls.Add(this.btnAlphilia);
+            this.pnlAlphilia.Location = new System.Drawing.Point(-6, 138);
+            this.pnlAlphilia.Name = "pnlAlphilia";
+            this.pnlAlphilia.Size = new System.Drawing.Size(217, 40);
+            this.pnlAlphilia.TabIndex = 5;
             // 
             // btnAlphilia
             // 
@@ -486,10 +494,60 @@ namespace Imagina
             this.btnServicios.UseVisualStyleBackColor = false;
             this.btnServicios.Click += new System.EventHandler(this.btnServicios_Click);
             // 
+            // pnlProductos
+            // 
+            this.pnlProductos.Controls.Add(this.btnProductos);
+            this.pnlProductos.Location = new System.Drawing.Point(3, 367);
+            this.pnlProductos.Name = "pnlProductos";
+            this.pnlProductos.Size = new System.Drawing.Size(219, 50);
+            this.pnlProductos.TabIndex = 7;
+            // 
+            // btnProductos
+            // 
+            this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductos.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductos.ForeColor = System.Drawing.Color.White;
+            this.btnProductos.Image = global::Imagina.Properties.Resources.libro;
+            this.btnProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnProductos.Location = new System.Drawing.Point(-28, -8);
+            this.btnProductos.Name = "btnProductos";
+            this.btnProductos.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.btnProductos.Size = new System.Drawing.Size(241, 65);
+            this.btnProductos.TabIndex = 2;
+            this.btnProductos.Text = "             Ver Productos";
+            this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnProductos.UseVisualStyleBackColor = true;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
+            // 
+            // pnlCarrito
+            // 
+            this.pnlCarrito.Controls.Add(this.btnCarrito);
+            this.pnlCarrito.Location = new System.Drawing.Point(3, 423);
+            this.pnlCarrito.Name = "pnlCarrito";
+            this.pnlCarrito.Size = new System.Drawing.Size(219, 50);
+            this.pnlCarrito.TabIndex = 6;
+            // 
+            // btnCarrito
+            // 
+            this.btnCarrito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCarrito.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCarrito.ForeColor = System.Drawing.Color.White;
+            this.btnCarrito.Image = global::Imagina.Properties.Resources.carrito;
+            this.btnCarrito.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCarrito.Location = new System.Drawing.Point(-30, -8);
+            this.btnCarrito.Name = "btnCarrito";
+            this.btnCarrito.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.btnCarrito.Size = new System.Drawing.Size(241, 65);
+            this.btnCarrito.TabIndex = 2;
+            this.btnCarrito.Text = "              Venta Actual";
+            this.btnCarrito.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCarrito.UseVisualStyleBackColor = true;
+            this.btnCarrito.Click += new System.EventHandler(this.btnCarrito_Click);
+            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.btnConfig);
-            this.panel6.Location = new System.Drawing.Point(3, 367);
+            this.panel6.Location = new System.Drawing.Point(3, 479);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(219, 50);
             this.panel6.TabIndex = 5;
@@ -512,16 +570,16 @@ namespace Imagina
             // 
             // pnlRelleno
             // 
-            this.pnlRelleno.Location = new System.Drawing.Point(3, 423);
+            this.pnlRelleno.Location = new System.Drawing.Point(3, 535);
             this.pnlRelleno.Name = "pnlRelleno";
-            this.pnlRelleno.Size = new System.Drawing.Size(210, 120);
+            this.pnlRelleno.Size = new System.Drawing.Size(210, 29);
             this.pnlRelleno.TabIndex = 6;
             this.pnlRelleno.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlRelleno_MouseDown);
             // 
             // panel8
             // 
             this.panel8.Controls.Add(this.btnLogout);
-            this.panel8.Location = new System.Drawing.Point(3, 549);
+            this.panel8.Location = new System.Drawing.Point(3, 570);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(212, 53);
             this.panel8.TabIndex = 6;
@@ -597,15 +655,17 @@ namespace Imagina
             this.panel5.ResumeLayout(false);
             this.pnlGestionar.ResumeLayout(false);
             this.librosContainer.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
+            this.pnlAgregar.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
+            this.pnlAlphilia.ResumeLayout(false);
             this.pnlLibros.ResumeLayout(false);
             this.servicesContainer.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.pnlServicios.ResumeLayout(false);
+            this.pnlProductos.ResumeLayout(false);
+            this.pnlCarrito.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -645,14 +705,18 @@ namespace Imagina
         private System.Windows.Forms.Button btnRevisar;
         private System.Windows.Forms.Panel pnlRelleno;
         private System.Windows.Forms.Panel librosContainer;
-        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel pnlAgregar;
         private System.Windows.Forms.Button btnAgregarlibro;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button btnLibros;
         private System.Windows.Forms.Panel pnlLibros;
         private System.Windows.Forms.Button btnGestionLibros;
-        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Panel pnlAlphilia;
         private System.Windows.Forms.Button btnAlphilia;
         private System.Windows.Forms.Timer GestionLibroTimer;
+        private System.Windows.Forms.Panel pnlProductos;
+        private System.Windows.Forms.Button btnProductos;
+        private System.Windows.Forms.Panel pnlCarrito;
+        private System.Windows.Forms.Button btnCarrito;
     }
 }

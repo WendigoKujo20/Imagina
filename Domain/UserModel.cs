@@ -22,7 +22,7 @@ namespace Domain
             return userDao.ObtenerUsuarios();
         }
 
-        public User obtenerUsuario(string Rut)
+        public User ObtenerUsuario(string Rut)
         {
             return userDao.ObtenerUsuario(Rut);
         }
@@ -50,6 +50,16 @@ namespace Domain
         public List<Region> ObtenerRegiones()
         {
             return userDao.ObtenerRegiones();
+        }
+
+        public List<Genero> ObtenerGeneros()
+        {
+            return userDao.ObtenerGeneros();
+        }
+
+        public List<TipoUsuario> ObtenerTipos()
+        {
+            return userDao.ObtenerTipos();
         }
     }
 }

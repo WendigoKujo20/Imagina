@@ -259,5 +259,131 @@ namespace DataAccess
 
             return exito;
         }
+
+        public Producto ObtenerProducto(int idProducto)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_OBTENER_PRODUCTO", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("P_ID_PRODUCTO", OracleDbType.Varchar2).Value = idProducto;
+                    OracleParameter datosProductoParameter = new OracleParameter("DATOS_PRODUCTO", OracleDbType.RefCursor);
+                    datosProductoParameter.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(datosProductoParameter);
+                    using (OracleDataReader reader = command.ExecuteReader(CommandBehavior.Default))
+                    {
+                        if (reader.Read())
+                        {
+                            Producto producto = new Producto();
+
+                            producto.IdProducto = reader.GetInt32(reader.GetOrdinal("ID_PRODUCTO"));
+                            producto.Nombre = reader.GetString(reader.GetOrdinal("NOMBRE"));
+                            int autorOrdinal = reader.GetOrdinal("AUTOR");
+                            if (!reader.IsDBNull(autorOrdinal))
+                            {
+                                producto.Autor = reader.GetString(autorOrdinal);
+                            }
+                            else
+                            {
+                                producto.Autor = null;
+                            }
+                            producto.Descripcion = reader.GetString(reader.GetOrdinal("DESCRIPCION"));
+                            producto.Precio = reader.GetInt32(reader.GetOrdinal("PRECIO"));
+                            producto.Stock = reader.GetInt32(reader.GetOrdinal("STOCK"));
+                            OracleBlob blob = reader.GetOracleBlob(reader.GetOrdinal("IMAGEN"));
+                            byte[] blobBytes = new byte[blob.Length];
+                            blob.Read(blobBytes, 0, (int)blob.Length);
+                            string base64Image = Convert.ToBase64String(blobBytes);
+                            producto.Imagen = base64Image;
+                            if (!reader.IsDBNull(reader.GetOrdinal("ID_GENERO_LITERARIO")))
+                            {
+                                int idGenero = reader.GetInt32(reader.GetOrdinal("ID_GENERO_LITERARIO"));
+                                producto.IdGeneroLiterario = idGenero;
+                                producto.NombreGenero = ObtenerNombreGeneroLiterario(idGenero);
+                            }
+                            int idTipoProducto = reader.GetInt32(reader.GetOrdinal("ID_TIPO_PRODUCTO"));
+                            producto.IdTipoProducto = idTipoProducto;
+                            producto.NombreTipo = ObtenerNombreTipoProducto(idTipoProducto);
+
+                            return producto;
+                        }
+                        else return null;
+                    }
+                }
+            }
+        }
+
+        public bool DescontarStock(int idProducto, int nuevoStock)
+        {
+            bool exito = false;
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_DESCONTAR_STOCK", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("P_ID_PRODUCTO", OracleDbType.Int32).Value = idProducto;
+                    command.Parameters.Add("P_NUEVO_STOCK", OracleDbType.Int32).Value = nuevoStock;
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        exito = true;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return exito;
+        }
+
+        public bool RegistrarProductoWS(int id, string nombre, string autor, string descripcion, int precio, int stock, Byte[] imagen, int? idGenero, int idTipo)
+        {
+            bool exito = false;
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SP_REGISTRAR_PRODUCTO_WS", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("P_ID_PRODUCTO", OracleDbType.Int32).Value = id;
+                    command.Parameters.Add("P_NOMBRE", OracleDbType.Varchar2).Value = nombre;
+                    command.Parameters.Add("P_AUTOR", OracleDbType.Varchar2).Value = autor;
+                    command.Parameters.Add("P_DESCRIPCION", OracleDbType.Varchar2).Value = descripcion;
+                    command.Parameters.Add("P_PRECIO", OracleDbType.Int32).Value = precio;
+                    command.Parameters.Add("P_STOCK", OracleDbType.Int32).Value = stock;
+                    command.Parameters.Add("P_IMAGEN", OracleDbType.Blob).Value = new OracleBinary(imagen);
+                    if (idGenero == -1)
+                    {
+                        command.Parameters.Add("P_ID_GENERO", OracleDbType.Int32).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        command.Parameters.Add("P_ID_GENERO", OracleDbType.Int32).Value = idGenero;
+                    }
+                    command.Parameters.Add("P_ID_TIPO", OracleDbType.Int32).Value = idTipo;
+
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        exito = true;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+            return exito;
+        }
     }
 }

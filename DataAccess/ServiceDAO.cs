@@ -62,7 +62,7 @@ namespace DataAccess
                             }
 
                             servicio.FechaServicio = reader.GetDateTime(reader.GetOrdinal("FECHA_SERVICIO"));
-                            servicio.IdTipoServicio = reader.GetInt32(reader.GetOrdinal("ID_TIPO_SERVICIO"));
+                            servicio.IdTipoServicio = reader.GetInt32(reader.GetOrdinal("ID_TIPO_SERVICIO_ID"));
 
                             servicios.Add(servicio);
                         }

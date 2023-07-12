@@ -41,5 +41,20 @@ namespace Domain
         {
             return productDAO.ModificarProducto(idProducto, nombre, autor, descripcion, precio, stock, imagen, idGenero, idTipo);
         }
+
+        public Producto ObtenerProducto(int idProducto)
+        {
+            return productDAO.ObtenerProducto(idProducto);
+        }
+
+        public bool DescontarStock(int idProducto, int nuevoStock)
+        {
+            return productDAO.DescontarStock(idProducto, nuevoStock);
+        }
+
+        public bool RegistrarProductosWS(int id, string nombre, string autor, string descripcion, int precio, int stock, Byte[] imagen, int? idGenero, int idTipo)
+        {
+            return productDAO.RegistrarProductoWS(id, nombre, autor, descripcion, precio, stock, imagen, idGenero, idTipo);
+        }
     }
 }

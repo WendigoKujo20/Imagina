@@ -265,10 +265,6 @@ namespace Imagina
                 MessageBox.Show("Producto Registrado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
-            else
-            {
-
-            }
         }
 
         private void btnRegresar_Click(object sender, EventArgs e)

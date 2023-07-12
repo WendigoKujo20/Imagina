@@ -380,10 +380,6 @@ namespace Imagina
             this.cboGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboGenero.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboGenero.FormattingEnabled = true;
-            this.cboGenero.Items.AddRange(new object[] {
-            "Masculino",
-            "Femenino",
-            "Personalizado"});
             this.cboGenero.Location = new System.Drawing.Point(65, 659);
             this.cboGenero.Name = "cboGenero";
             this.cboGenero.Size = new System.Drawing.Size(169, 23);
@@ -406,9 +402,6 @@ namespace Imagina
             this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipo.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTipo.FormattingEnabled = true;
-            this.cboTipo.Items.AddRange(new object[] {
-            "Tecnico",
-            "Vendedor"});
             this.cboTipo.Location = new System.Drawing.Point(263, 659);
             this.cboTipo.Name = "cboTipo";
             this.cboTipo.Size = new System.Drawing.Size(153, 23);

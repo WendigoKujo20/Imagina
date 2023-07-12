@@ -91,7 +91,7 @@ namespace Imagina
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(233, 20);
             this.txtCorreo.TabIndex = 1;
-            this.txtCorreo.Text = "Correo";
+            this.txtCorreo.Text = "ben.lopez@gmail.com";
             this.txtCorreo.Enter += new System.EventHandler(this.txtCorreo_Enter);
             this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave);
             // 
@@ -105,7 +105,7 @@ namespace Imagina
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(233, 20);
             this.txtPassword.TabIndex = 2;
-            this.txtPassword.Text = "Contraseña";
+            this.txtPassword.Text = "12345678";
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
             // 

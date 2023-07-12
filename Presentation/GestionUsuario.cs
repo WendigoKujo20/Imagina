@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Domain;
 using Common.Cache;
 using Region = Common.Cache.Region;
+using System.Text.RegularExpressions;
 
 namespace Imagina
 {
@@ -19,6 +20,8 @@ namespace Imagina
         {
             InitializeComponent();
             RellenarRegiones();
+            RellenarGeneros();
+            RellenarTipos();
         }
 
         UserModel userModel = new UserModel();
@@ -59,6 +62,24 @@ namespace Imagina
             }
         }
 
+        private void RellenarGeneros()
+        {
+            List<Genero> generos = userModel.ObtenerGeneros();
+            foreach (Genero genero in generos)
+            {
+                cboGenero.Items.Add(genero.Nombre);
+            }
+        }
+
+        private void RellenarTipos()
+        {
+            List<TipoUsuario> tipos = userModel.ObtenerTipos();
+            foreach (TipoUsuario tipo in tipos)
+            {
+                cboTipo.Items.Add(tipo.Nombre);
+            }
+        }
+
         private void cboRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Region> regiones = userModel.ObtenerRegiones();
@@ -80,6 +101,33 @@ namespace Imagina
                 if (cboComuna.SelectedItem.ToString() == comuna.Nombre)
                 {
                     return comuna.IdComuna;
+                }
+            }
+            return 0;
+        }
+        private int ObtenerIdGenero()
+        {
+            List<Genero> generos = userModel.ObtenerGeneros();
+
+            foreach (Genero genero in generos)
+            {
+                if (cboGenero.SelectedItem.ToString() == genero.Nombre)
+                {
+                    return genero.IdGenero;
+                }
+            }
+            return 0;
+        }
+
+        private int ObtenerIdTipo()
+        {
+            List<TipoUsuario> tipos = userModel.ObtenerTipos();
+
+            foreach (TipoUsuario tipo in tipos)
+            {
+                if (cboTipo.SelectedItem.ToString() == tipo.Nombre)
+                {
+                    return tipo.IdTipoUsuario;
                 }
             }
             return 0;
@@ -197,92 +245,128 @@ namespace Imagina
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            int idGenero = 0;
-            int idTipo = 0;
-
-            if (cboGenero.SelectedItem == "Masculino")
-            {
-                idGenero = 1;
-            }
-            else if (cboGenero.SelectedItem == "Femenino")
-            {
-                idGenero = 2;
-            }
-            else if (cboGenero.SelectedItem == "Personalizado")
-            {
-                idGenero = 3;
-            }
-
-            if (cboTipo.SelectedItem == "Administrador")
-            {
-                idTipo = 1;
-            }
-            else if (cboTipo.SelectedItem == "Tecnico")
-            {
-                idTipo = 2;
-            }
-            else if (cboTipo.SelectedItem == "Vendedor")
-            {
-                idTipo = 3;
-            }else if(cboTipo.SelectedItem == "Cliente")
-            {
-                idTipo = 4;
-            }
-
+            int idGenero;
+            int idTipo;
             string nombre = txtNombre.Text;
             string apellidos = txtApellidos.Text;
-            string telefonoText = txtTelefono.Text;
             int telefono;
-            bool exito = int.TryParse(telefonoText, out telefono);
             string correo = txtCorreo.Text;
             string password = txtPassword.Text;
             DateTime fechaNacimiento = PickerFecha.Value;
             string direccion = txtDireccion.Text;
             int aniosExperiencia = (int)numericAnios.Value;
-            if (nombre.Length > 1 && nombre != "Nombre")
-            {
-                if (apellidos.Length > 1 && apellidos != "Apellidos")
-                {
-                    if (exito)
-                    {
-                        if (correo.Length > 1 && correo != "Correo")
-                        {
-                            if (password.Length > 1 && password != "Contraseña")
-                            {
-                                if (direccion.Length > 1 && direccion != "Dirección")
-                                {
-                                    if (cboComuna.SelectedItem != null)
-                                    {
-                                        if (cboGenero.SelectedItem != null)
-                                        {
-                                            if (cboTipo.SelectedItem != null)
-                                            {
-                                                int idComuna = ObtenerIdComuna();
-                                                bool modificar = userModel.ModificarUsuario(Rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipo);
 
-                                                if (modificar)
-                                                {
-                                                    this.Close();
-                                                }
-                                                else error("No se ha podido Registrar");
-                                            }
-                                            else error("Tiene que seleccionar un usuario");
-                                        }
-                                        else error("Tiene que seleccionar un genero");
-                                    }
-                                    else error("Tiene que seleccionar una comuna");
-                                }
-                                else error("La direccion no puede estar vacia");
-                            }
-                            else error("La contraseña no puede estar vacia");
-                        }
-                        else error("El correo no puede estar vacio");
-                    }
-                    else error("El telefono no puede estar vacio");
-                }
-                else error("Los Apellidos no pueden estar vacios");
+            if (nombre == "Nombre" || nombre.Length < 1 || nombre.Length > 60)
+            {
+                error("Nombre no valido");
+                return;
             }
-            else error("El nombre no puede estar vacio");
+
+            if (apellidos == "Apellidos" || apellidos.Length < 1 || apellidos.Length > 80)
+            {
+                error("Apellidos no validos");
+                return;
+            }
+
+            if (correo == "Correo" || !EmailValido(correo))
+            {
+                error("El Correo debe tener un formato valido");
+                return;
+            }
+
+            if (txtTelefono.Text == "Telefono" || txtTelefono.Text.Length != 9)
+            {
+                error("El Telefono debe tener 9 caracteres");
+                return;
+            }
+            else
+            {
+                telefono = int.Parse(txtTelefono.Text);
+            }
+
+            if (direccion == "Dirección" || direccion.Length < 1 || direccion.Length > 80)
+            {
+                error("Direccion no valida");
+                return;
+            }
+
+            if (password.Length < 1 || password == "Contraseña")
+            {
+                error("Contraseña no valida");
+                return;
+            }
+
+            if (!EdadValida(fechaNacimiento))
+            {
+                error("Debe ser mayor de edad");
+                return;
+            }
+
+            if (cboRegion.SelectedItem == null)
+            {
+                error("Debe seleccionar una Región");
+                return;
+            }
+
+            if (cboComuna.SelectedItem == null)
+            {
+                error("Debe seleccionar una Comuna");
+                return;
+            }
+
+            if (cboGenero.SelectedItem == null)
+            {
+                error("Debe seleccionar un Genero");
+                return;
+            }
+            else
+            {
+                idGenero = ObtenerIdGenero();
+            }
+
+            if (cboTipo.SelectedItem == null)
+            {
+                error("Debe seleccionar un Tipo de usuario");
+                return;
+            }
+            else
+            {
+                idTipo = ObtenerIdTipo();
+            }
+
+            if (txtPassword.Text != Password)
+            {
+                error("Contraseña incorrecta");
+                return;
+            }
+
+            int idComuna = ObtenerIdComuna();
+            bool modificado = userModel.ModificarUsuario(Rut, nombre, apellidos, telefono, correo, password, fechaNacimiento, direccion, aniosExperiencia, idGenero, idComuna, idTipo);
+            if (modificado)
+            {
+                MessageBox.Show("Usuario Modificado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+        }
+
+        static bool EmailValido(string email)
+        {
+            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
+        }
+
+        static bool EdadValida(DateTime fechaNacimiento)
+        {
+            DateTime fechaActual = DateTime.Now;
+            int edad = fechaActual.Year - fechaNacimiento.Year;
+
+            if (fechaActual.Month < fechaNacimiento.Month || (fechaActual.Month == fechaNacimiento.Month && fechaActual.Day < fechaNacimiento.Day))
+            {
+                edad--;
+            }
+
+            return edad >= 18;
         }
 
         private void error(string mensaje)
