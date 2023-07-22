@@ -35,9 +35,9 @@ namespace Imagina
         public DateTime FechaNacimiento { get; set; }
         public string Direccion { get; set; }
         public int AniosExperiencia { get; set; }
-        public string Genero { get; set; }
+        public int IdGenero { get; set; }
         public int IdComuna { get; set; }
-        public string TipoUsuario { get; set; }
+        public int IdTipoUsuario { get; set; }
 
         private void RellenarComunas(int idRegion)
         {
@@ -78,6 +78,36 @@ namespace Imagina
             {
                 cboTipo.Items.Add(tipo.Nombre);
             }
+        }
+
+        private void CargarRegion(int idComuna)
+        {
+            List<Comuna> comunas = userModel.ObtenerComunas();
+            List<Region> regiones = userModel.ObtenerRegiones();
+            Comuna comuna = comunas.FirstOrDefault(c => c.IdComuna == IdComuna);
+            Region region = regiones.FirstOrDefault(r => r.IdRegion == comuna.IdRegion);
+            cboRegion.SelectedItem = region.Nombre;
+        }
+
+        private void CargarComuna(int idComuna)
+        {
+            List<Comuna> comunas = userModel.ObtenerComunas();
+            Comuna comuna = comunas.FirstOrDefault(c => c.IdComuna == IdComuna);
+            cboComuna.SelectedItem = comuna.Nombre;
+        }
+
+        private void CargarGenero(int idGenero)
+        {
+            List<Genero> generos = userModel.ObtenerGeneros();
+            Genero genero = generos.FirstOrDefault(g => g.IdGenero == IdGenero);
+            cboGenero.SelectedItem = genero.Nombre;
+        }
+
+        private void CargarTipo(int idTipo)
+        {
+            List<TipoUsuario> tipos = userModel.ObtenerTipos();
+            TipoUsuario tipo = tipos.FirstOrDefault(t => t.IdTipoUsuario== idTipo);
+            cboTipo.SelectedItem = tipo.Nombre;
         }
 
         private void cboRegion_SelectedIndexChanged(object sender, EventArgs e)
@@ -143,6 +173,10 @@ namespace Imagina
             txtDireccion.Text = Direccion;
             PickerFecha.Value = FechaNacimiento;
             numericAnios.Value = AniosExperiencia;
+            CargarRegion(IdComuna);
+            CargarComuna(IdComuna);
+            CargarGenero(IdGenero);
+            CargarTipo(IdTipoUsuario);
         }
 
         private void txtNombre_Enter(object sender, EventArgs e)

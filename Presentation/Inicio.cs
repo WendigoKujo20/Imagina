@@ -120,9 +120,9 @@ namespace Imagina
                         modalGestion.FechaNacimiento = usuario.FechaNacimiento;
                         modalGestion.Direccion = usuario.Direccion;
                         modalGestion.AniosExperiencia = usuario.AniosExperiencia;
-                        modalGestion.Genero = Genero;
+                        modalGestion.IdGenero = usuario.IdGenero;
                         modalGestion.IdComuna = usuario.IdComuna;
-                        modalGestion.TipoUsuario = TipoUsuario;
+                        modalGestion.IdTipoUsuario = usuario.IdTipoUsuario;
 
                         modalGestion.FormClosed += GestionUsuario_FormClosed;
                         modalGestion.ShowDialog();

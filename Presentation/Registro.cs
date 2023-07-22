@@ -285,7 +285,8 @@ namespace Imagina
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-
+            List<User> usuarios = new List<User>();
+            usuarios = userModel.ObtenerUsuarios();
             int idGenero;
             int idTipo;
             string rut = txtRut.Text;
@@ -316,10 +317,28 @@ namespace Imagina
                 return;
             }
 
+            foreach (User user in usuarios)
+            {
+                if (correo == user.Correo)
+                {
+                    error("El Correo no esta disponible");
+                    return;
+                }
+            }
+
             if (!RutValido(rut))
             {
                 error("El rut debe tener un formato correcto");
                 return;
+            }
+
+            foreach (User user in usuarios)
+            {
+                if (rut == user.Rut)
+                {
+                    error("El Rut no esta disponible");
+                    return;
+                }
             }
 
             if (txtTelefono.Text == "Telefono" || txtTelefono.Text.Length != 9)
@@ -330,6 +349,15 @@ namespace Imagina
             else
             {
                 telefono = int.Parse(txtTelefono.Text);
+            }
+
+            foreach (User user in usuarios)
+            {
+                if (txtTelefono.Text == user.Telefono.ToString())
+                {
+                    error("El Telefono no esta disponible");
+                    return;
+                }
             }
 
             if (direccion == "Dirección" || direccion.Length < 1 || direccion.Length > 80)

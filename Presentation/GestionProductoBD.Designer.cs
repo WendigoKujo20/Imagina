@@ -333,9 +333,8 @@ namespace Imagina
             this.lblNombreArchivo.ForeColor = System.Drawing.Color.White;
             this.lblNombreArchivo.Location = new System.Drawing.Point(175, 490);
             this.lblNombreArchivo.Name = "lblNombreArchivo";
-            this.lblNombreArchivo.Size = new System.Drawing.Size(25, 13);
+            this.lblNombreArchivo.Size = new System.Drawing.Size(0, 13);
             this.lblNombreArchivo.TabIndex = 68;
-            this.lblNombreArchivo.Text = "aaa";
             // 
             // GestionProductoBD
             // 

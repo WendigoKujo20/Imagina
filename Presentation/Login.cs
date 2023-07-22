@@ -89,40 +89,30 @@ namespace Imagina
             string correo = txtCorreo.Text.Trim();
             string password = txtPassword.Text;
 
-            if (correo != "Correo" && correo.Length > 4)
+            UserModel user = new UserModel();
+            var validarLogin = user.LoginUser(correo, password);
+            if (validarLogin)
             {
-                if (password != "Contraseña" && password.Length > 7)
+                int tipoUsuario = UserLoginCache.IdTipoUsuario;
+                if (tipoUsuario != 4)
                 {
-
-                    UserModel user = new UserModel();
-                    var validarLogin = user.LoginUser(correo, password);
-                    if (validarLogin)
-                    {
-                        int tipoUsuario = UserLoginCache.IdTipoUsuario;
-                        if (tipoUsuario != 4)
-                        {
-                            Inicio inicio = new Inicio();
-                            inicio.Show();
-                            inicio.FormClosed += logOut;
-                            this.Hide();
-                        }
-                        else error("Usuario no autorizado");
-                        txtPassword.Text = "Contraseña";
-                        txtCorreo.Text = "Correo";
-                        txtPassword.UseSystemPasswordChar = false;
-                    }
-                    else
-                    {
-                        error("Correo o Contraseña incorrectos");
-                        txtPassword.Text = "Contraseña";
-                        txtPassword.UseSystemPasswordChar = false;
-                        txtCorreo.Focus();
-                    }
-
+                    Inicio inicio = new Inicio();
+                    inicio.Show();
+                    inicio.FormClosed += logOut;
+                    this.Hide();
                 }
-                else error("La Contraseña debe tener al menos 8 caracteres");
+                else error("Usuario no autorizado");
+                txtPassword.Text = "Contraseña";
+                txtCorreo.Text = "Correo";
+                txtPassword.UseSystemPasswordChar = false;
             }
-            else error("El Correo debe tener al menos 4 caracteres");
+            else
+            {
+                error("Correo o Contraseña incorrectos");
+                txtPassword.Text = "Contraseña";
+                txtPassword.UseSystemPasswordChar = false;
+                txtCorreo.Focus();
+            }
         }
 
         private void error(string mensaje)
